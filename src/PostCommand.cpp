@@ -1,4 +1,5 @@
 #include "PostCommand.hpp"
+#include "Util.hpp"
 
 namespace cms
 {
@@ -10,7 +11,8 @@ namespace cms
 
 	std::string PostCommand::execute(OrderManagerPtr orderManager)
 	{
-		return "TODO";
+		int orderID = orderManager->postOrder(order());
+		return util::fromInt(orderID) + " " + order().toString() + " HAS BEEN POSTED";
 	}
 
 	const Order& PostCommand::order() const

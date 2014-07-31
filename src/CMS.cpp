@@ -1,19 +1,8 @@
 #include <iostream>
-#include <sstream>
 #include "BaseInputMode.hpp"
+#include "Util.hpp"
 
 using namespace cms;
-
-// NOTE: I would normally use Boost.Lexical_Cast, but since it cannot be
-// used for this assignment, I have wrote a basic conversion function
-// myself, which uses standard library functionality.
-int toInt(const std::string& str)
-{
-	int value = 0;
-	std::istringstream stream(str);
-	stream >> value;
-	return value;
-}
 
 int main(int argc, char* argv[])
 {
@@ -34,7 +23,7 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			port = toInt(argv[2]);
+			port = util::toInt(argv[2]);
 		}
 	}
 

@@ -1,4 +1,5 @@
 #include "Order.hpp"
+#include "Util.hpp"
 
 namespace cms
 {
@@ -46,6 +47,16 @@ namespace cms
 		{
 			return false;
 		}
+	}
+
+	std::string Order::toString() const
+	{
+		std::string outputStr = orderDealerID;
+		outputStr += " " + COMMODITY_STRINGS[orderCommodity];
+		outputStr += " " + SIDE_STRINGS[orderSide];
+		outputStr += " " + util::fromInt(orderAmount);
+		outputStr += " " + util::fromDouble(orderPrice);
+		return outputStr;
 	}
 
 }

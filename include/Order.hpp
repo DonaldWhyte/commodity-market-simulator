@@ -51,6 +51,10 @@ namespace cms
 
 		bool reduceAmount(int amountToReduce);
 
+		/* Return textual representation of order, in the
+		 * format described in the CMS' formal specification. */
+		std::string toString() const;
+
 	private:
 		std::string orderDealerID;
 		Side orderSide;
