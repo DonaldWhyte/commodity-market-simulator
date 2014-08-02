@@ -4,36 +4,11 @@
 #include <vector>
 #include <sstream>
 #include "PostCommand.hpp"
+#include "ListCommand.hpp"
 #include "ParseException.hpp"
 
 namespace cms
 {
-
-	// NOTE: These string conversion functions throw ParseExceptions
-	// if the strings do not represent valid commodities/sides/numbers
-	Commodity toCommodity(const std::string& str)
-	{
-		for (unsigned int index = 1; (index < NUM_COMMODITIES); ++index)
-		{
-			if (str == COMMODITY_STRINGS[index])
-			{
-				return static_cast<Commodity>(index);
-			}
-		}
-		throw ParseException(str + " is not a valid commodity");
-	}
-
-	Side toSide(const std::string& str)
-	{
-		for (unsigned int index = 1; (index < NUM_SIDES); ++index)
-		{
-			if (str == SIDE_STRINGS[index])
-			{
-				return static_cast<Side>(index);
-			}
-		}
-		throw ParseException(str + " is not a valid side");
-	}
 
 	int toPositiveInteger(const std::string& str)
 	{
@@ -96,7 +71,10 @@ namespace cms
 	CommandPtr parseListCommand(const std::string& dealerID,
 		const std::vector<std::string>& args)
 	{
-		return CommandPtr( reinterpret_cast<Command*>(NULL) );	
+		std::string commodityFilter = (args.size() > 0) ? args[0] : "";
+		std::string dealerFilter = (args.size() > 1) ? args[1] : "";
+		Command* listCommand = new ListCommand(dealerID, commodityFilter, dealerFilter);
+		return CommandPtr(listCommand);	
 	}
 
 	CommandPtr parseAggressCommand(

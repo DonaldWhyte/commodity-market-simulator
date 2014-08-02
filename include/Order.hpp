@@ -36,6 +36,11 @@ namespace cms
 		"UNKNOWN", "BUY", "SELL" 
 	};
 
+	// NOTE: These string conversion functions throw CMSException
+	// if the strings do not represent valid commodities/sides/numbers
+	Commodity toCommodity(const std::string& str);
+	Side toSide(const std::string& str);
+
 	class Order
 	{
 

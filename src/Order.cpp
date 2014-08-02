@@ -1,8 +1,33 @@
 #include "Order.hpp"
 #include "Util.hpp"
+#include "CMSException.hpp"
 
 namespace cms
 {
+
+	Commodity toCommodity(const std::string& str)
+	{
+		for (unsigned int index = 1; (index < NUM_COMMODITIES); ++index)
+		{
+			if (str == COMMODITY_STRINGS[index])
+			{
+				return static_cast<Commodity>(index);
+			}
+		}
+		throw CMSException(str + " is not a valid commodity");
+	}
+
+	Side toSide(const std::string& str)
+	{
+		for (unsigned int index = 1; (index < NUM_SIDES); ++index)
+		{
+			if (str == SIDE_STRINGS[index])
+			{
+				return static_cast<Side>(index);
+			}
+		}
+		throw CMSException(str + " is not a valid side");
+	}
 
 	Order::Order(const std::string& dealerID, Side side,
 		Commodity commodity, int amount, double price) :
