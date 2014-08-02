@@ -7,6 +7,7 @@
 #include "RevokeCommand.hpp"
 #include "CheckCommand.hpp"
 #include "ListCommand.hpp"
+#include "AggressCommand.hpp"
 #include "ParseException.hpp"
 #include "Util.hpp"
 
@@ -59,7 +60,19 @@ namespace cms
 		const std::vector<std::string>& args,
 		DealerManagerPtr dealerManager)
 	{
-		return CommandPtr( reinterpret_cast<Command*>(NULL) );	
+		std::vector<OrderAggressAmount> ordersToAggress;
+		// Arguments should come in pairs of twos, so we iterate
+		// through two at a time.
+		// NOTE: This means any odd, leftover argument will be ignored
+		for (unsigned int i = 0; (i < args.size() - 1); i += 2)
+		{
+			OrderID orderID = util::toInt(args[i]);
+			int amount = util::toPositiveInt(args[i + 1]);
+			ordersToAggress.push_back( OrderAggressAmount(orderID, amount) );
+		}
+
+		Command* aggressCommand = new AggressCommand(dealerID, ordersToAggress);
+		return CommandPtr(aggressCommand);	
 	}
 
 
