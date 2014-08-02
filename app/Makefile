@@ -57,7 +57,8 @@
 ##==========================================================================
 
 # The pre-processor and compiler options.
-MY_CFLAGS = -I./include
+# NOTE: ADDED GLOBAL CMS SOURCE FILES TOO!
+MY_CFLAGS = -I./include -I../common/include
 
 # The linker options.
 MY_LIBS   =
@@ -70,7 +71,7 @@ LDFLAGS   =
 
 # The directories in which source files reside.
 # If not specified, only the current directory will be searched.
-SRCDIRS   = ./src ./include
+SRCDIRS   = ./src ./include ../common/src ../common/include
 
 # The executable file name.
 # If not specified, current directory name or `a.out' will be used.
