@@ -46,7 +46,8 @@ namespace cms
 				stream << ex.what() << "\n";
 			}
 		}
-
+		// NOTE: added output -- not in original spec!
+		stream << "END OF AGGRESS";
 		return stream.str();
 	}
 
