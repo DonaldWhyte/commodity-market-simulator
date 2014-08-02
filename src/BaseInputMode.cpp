@@ -27,7 +27,7 @@ namespace cms
 					CommandPtr command = commandParser->parse(input);
 					std::cout << "> " << command->execute(orderManager) << std::endl;
 				}
-				catch (const ParseException& ex)
+				catch (const CMSException& ex)
 				{
 					// Display exception message
 					std::cout << "INVALID COMMAND: " << ex.what() << std::endl;

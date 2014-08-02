@@ -10,6 +10,8 @@ namespace cms
 	{
 
 		int toInt(const std::string& str);
+		int toPositiveInt(const std::string& str);
+		double toDouble(const std::string& str);
 		std::string fromInt(int val);
 		std::string fromDouble(double val);
 
