@@ -8,6 +8,10 @@
 namespace cms
 {
 
+	// TODO: make error messages follow specification
+	// TODO: determine how to handle interleaved success/errors
+	//       with multiple aggressions (just list all in newlines???)
+
 	typedef std::pair<OrderID, unsigned int> OrderAggressAmount;
 
 	class AggressCommand : public Command

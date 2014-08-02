@@ -11,18 +11,12 @@ namespace cms
 	std::string constructOrderListString(const OrderCollection& orders)
 	{
 		std::stringstream stream;
-		if (orders.size() > 0)
+		// Convert each order to string, separating them with newlines
+		for (OrderCollection::const_iterator order = orders.begin(); (order != orders.end()); order++)
 		{
-			// Convert first order to string -- no need for a newline!
-			OrderCollection::const_iterator order = orders.begin();
-			stream << order->first << " " << order->second.toString();
-			order++;
-			// Convert remaining orders, separating them my newlines
-			for (order; (order != orders.end()); order++)
-			{
-				stream << "\n  " << order->first << " " << order->second.toString();
-			}
+			stream << order->first << " " << order->second.toString() << "\n";
 		}
+		stream << "END OF LIST";
 		return stream.str();	
 	}
 

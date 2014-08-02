@@ -1,5 +1,6 @@
 #include "BaseInputMode.hpp"
 #include "ParseException.hpp"
+#include <sstream>
 
 namespace cms
 {
@@ -21,16 +22,25 @@ namespace cms
 			}
 			else
 			{
-				std::cout << "> "; // prefix
+				std::string output = "";
 				try
 				{
 					// Parse textual command and execute it
 					CommandPtr command = commandParser->parse(input);
-					std::cout << command->execute(orderManager) << std::endl;
+					output = command->execute(orderManager);
 				}
-				catch (const CMSException& ex) // error messages
+				catch (const CMSException& ex)
 				{
-					std::cout << ex.what() << std::endl;
+					// Retrieve error message if exception is thrown
+					output = ex.what();
+				}
+				// Display output, making sure to prefix all lines with "\n"
+				std::istringstream outputStream(output);
+				std::string line;
+				while (!outputStream.eof())
+				{
+					std::getline(outputStream, line);
+					std::cout << "> " << line << std::endl;
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 #include "AggressCommand.hpp"
-#include <sstream> // TODO: remove
+#include <sstream>
 
 namespace cms
 {
