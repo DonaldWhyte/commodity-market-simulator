@@ -1,9 +1,37 @@
 #include "ListCommand.hpp"
 #include <sstream>
-#include <vector>
 
 namespace cms
 {
+
+	/* Return string which lists information about all of the
+	 * orders with the given IDs (as stored in the given OrderCollection).
+	 * Each order is separated by a new line in the string. */
+	std::string constructOrderListString(const OrderCollection& orders)
+	{
+		std::stringstream stream;
+		if (orders.size() > 0)
+		{
+			// Convert first order to string -- no need for a newline!
+			OrderCollection::const_iterator order = orders.begin();
+			stream << order->first << " " << order->second.toString();
+			order++;
+			// Convert remaining orders, separating them my newlines
+			for (order; (order != orders.end()); order++)
+			{
+				stream << "\n  " << order->first << " " << order->second.toString();
+			}
+		}
+		return stream.str();	
+	}
+
+	void removeOrdersByID(OrderCollection& orders, const std::vector<OrderID>& idsToRemove)
+	{
+		for (std::vector<OrderID>::const_iterator id = idsToRemove.begin(); (id != idsToRemove.end()); id++)
+		{
+			orders.erase(orders.find(*id));
+		}		
+	}
 
 	ListCommand::ListCommand(const std::string& dealerID,
 		const std::string& commodityFilter, const std::string& dealerFilter)
@@ -26,63 +54,46 @@ namespace cms
 
 	std::string ListCommand::execute(OrderManagerPtr orderManager)
 	{
-		const OrderCollection& orders = orderManager->allOrders();
 		// Initially select all orders
-		std::vector<OrderID> ordersToList;
-		ordersToList.reserve(orders.size());
-		for (OrderCollection::const_iterator it = orders.begin(); (it != orders.end()); it++)
+		OrderCollection ordersToList = orderManager->allOrders();
+		// Apply list filters and return information on remaining orders
+		if (commodityToList != COMMODITY_UNKNOWN)
 		{
-			ordersToList.push_back(it->first);
+			filterByCommodity(ordersToList, commodityToList);
 		}
-
-		// Remove orders without matching commodity
-		if (commodityToList != COMMODITY_UNKNOWN) // only if filter provided
-		{
-			// Done in reverse order to we can remove indices
-			// from the vector while iterating through it
-			for (int i = ordersToList.size() - 1; (i >= 0); i--)
-			{
-				// Remove order index if its commodity does not match filter
-				OrderID id = ordersToList[i];
-				OrderCollection::const_iterator order = orders.find(id);
-				if (order->second.commodity() != commodityToList)
-				{
-					ordersToList.erase(ordersToList.begin() + i);
-				}
-			}
-		}
-
-		// Remove orders without matching dealer ID
 		if (!dealerToList.empty())
 		{
-			for (int i = ordersToList.size() - 1; (i >= 0); i--)
-			{
-				OrderID id = ordersToList[i];
-				OrderCollection::const_iterator order = orders.find(id);
-				if (order->second.dealerID() != dealerToList)
-				{
-					ordersToList.erase(ordersToList.begin() + i);
-				}
-			}
+			filterByDealer(ordersToList, dealerToList);
 		}
+		return constructOrderListString(ordersToList);
+	}
 
-		// Return list of all matching orders as a string
-		std::stringstream stream;
-		if (ordersToList.size() > 0)
+	void ListCommand::filterByCommodity(OrderCollection& orders, Commodity commodity)
+	{
+		// Find IDs of all orders that DO NOT MATCH FILTER
+		std::vector<OrderID> idsToRemove;
+		for (OrderCollection::const_iterator order = orders.begin(); (order != orders.end()); order++)
 		{
-			// Convert first order to string -- no need for a newline!
-			std::vector<OrderID>::const_iterator orderID = ordersToList.begin();
-			OrderCollection::const_iterator order = orders.find(*orderID);
-			stream << order->first << " " << order->second.toString();
-			orderID++;
-			// Convert remaining orders, separating them my newlines
-			for (orderID; (orderID != ordersToList.end()); orderID++)
+			if (order->second.commodity() != commodity)
 			{
-				order = orders.find(*orderID);
-				stream << "\n  " << order->first << " " << order->second.toString();
-			}
+				idsToRemove.push_back(order->first);
+			}			
 		}
-		return stream.str();	
+		removeOrdersByID(orders, idsToRemove);
+	}
+
+	void ListCommand::filterByDealer(OrderCollection& orders, const std::string& dealerID)
+	{
+		// Find IDs of all orders that DO NOT MATCH FILTER
+		std::vector<OrderID> idsToRemove;
+		for (OrderCollection::const_iterator order = orders.begin(); (order != orders.end()); order++)
+		{
+			if (order->second.dealerID() != dealerID)
+			{
+				idsToRemove.push_back(order->first);
+			}			
+		}
+		removeOrdersByID(orders, idsToRemove);
 	}
 
 }
