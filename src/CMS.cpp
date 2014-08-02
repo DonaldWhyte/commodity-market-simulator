@@ -48,8 +48,11 @@ int main(int argc, char* argv[])
 	}
 
 	// Initialise program state and execute mode
+	DealerManagerPtr dealerManager(new DealerManager());
 	OrderManagerPtr orderManager(new OrderManager());
-	std::tr1::shared_ptr<CommandParser> commandParser;
+	std::tr1::shared_ptr<CommandParser> commandParser(
+		new CommandParser(dealerManager)
+	);
 	inputMode->run(orderManager, commandParser);
 
 	return 0;

@@ -15,7 +15,6 @@ namespace cms
 	class OrderManager
 	{
 		
-
 	public:
 		OrderManager(const OrderCollection& initialOrders = OrderCollection());
 

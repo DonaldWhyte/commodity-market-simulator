@@ -3,12 +3,18 @@
 #include <algorithm>
 #include <iterator>
 
+#include "DealerManager.hpp"
 #include "CommandTypes.hpp"
 #include "CommandParser.hpp"
 #include "ParseException.hpp"
 
 namespace cms
 {
+
+	CommandParser::CommandParser(DealerManagerPtr dealerManager)
+		: dealerManager(dealerManager)
+	{
+	}
 
 	CommandPtr CommandParser::parse(const std::string& commandStr) const
 	{
@@ -26,14 +32,22 @@ namespace cms
 		{
 			throw ParseException("Dealer ID and command type must be given");
 		}
+
+		// Check dealer exists in system
 		std::string dealerID = tokens[0];
-		std::string typeStr = tokens[1];
+		if (!dealerManager->isValidDealer(dealerID))
+		{
+			throw ParseException("UNKNOWN_DEALER");
+		}
+
 		// Retrieve type object corresponding to the given command type
+		std::string typeStr = tokens[1];
 		const CommandType* typeObject = getCommandType(typeStr);
 		if (!typeObject)
 		{
 			throw ParseException(typeStr + " is not a valid command");
 		}
+
 		// Remove first two entries of tokens, so only command args remain
 		tokens.erase(tokens.begin(), tokens.begin() + 2); // guaranteed to have at least two elements, so this is safe
 		// Ensure enough arguments are given

@@ -30,7 +30,7 @@ namespace cms
 				catch (const CMSException& ex)
 				{
 					// Display exception message
-					std::cout << "INVALID COMMAND: " << ex.what() << std::endl;
+					std::cout << ex.what() << std::endl;
 				}
 			}
 		}
