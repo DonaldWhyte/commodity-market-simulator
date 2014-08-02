@@ -1,4 +1,5 @@
 #include "CMSClient.hpp"
+#include <boost/asio.hpp>
 
 namespace cms
 {
