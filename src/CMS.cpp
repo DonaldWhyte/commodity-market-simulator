@@ -1,5 +1,6 @@
 #include <iostream>
 #include "BaseInputMode.hpp"
+#include "TCPInputMode.hpp"
 #include "Util.hpp"
 
 using namespace cms;
@@ -20,6 +21,7 @@ int main(int argc, char* argv[])
 		if (argc < 3)
 		{
 			std::cout << "Port number must be provided with mode " << mode << std::endl;
+			return 0;
 		}
 		else
 		{
@@ -35,7 +37,7 @@ int main(int argc, char* argv[])
 	}
 	else if (mode == "ext1")
 	{
-		return 1;
+		inputMode = std::tr1::shared_ptr<InputMode>(new TCPInputMode(port));
 	}
 	else if (mode == "ext2")
 	{
