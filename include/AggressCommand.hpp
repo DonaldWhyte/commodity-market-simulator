@@ -20,6 +20,9 @@ namespace cms
 		virtual std::string execute(OrderManagerPtr orderManager);
 
 	private:
+		void executeAggress(OrderManagerPtr orderManager,
+			const OrderAggressAmount& orderAggress);
+
 		std::vector<OrderAggressAmount> ordersToAggress;
 
 	};
