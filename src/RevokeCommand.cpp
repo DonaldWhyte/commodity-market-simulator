@@ -17,7 +17,6 @@ namespace cms
 
 	std::string RevokeCommand::execute(OrderManagerPtr orderManager)
 	{
-		
 		try
 		{
 			// Find order that should be revoked and
