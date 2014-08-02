@@ -77,8 +77,8 @@ namespace cms
 	std::string Order::toString() const
 	{
 		std::string outputStr = orderDealerID;
-		outputStr += " " + COMMODITY_STRINGS[orderCommodity];
 		outputStr += " " + SIDE_STRINGS[orderSide];
+		outputStr += " " + COMMODITY_STRINGS[orderCommodity];
 		outputStr += " " + util::fromInt(orderAmount);
 		outputStr += " " + util::fromDouble(orderPrice);
 		return outputStr;
