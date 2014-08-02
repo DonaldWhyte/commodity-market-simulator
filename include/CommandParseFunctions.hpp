@@ -15,7 +15,8 @@ namespace cms
 
 	// Command type specific parse functions
 	CommandPtr parsePostCommand(const std::string& dealerID,
-		const std::vector<std::string>& args)
+		const std::vector<std::string>& args,
+		DealerManagerPtr dealerManager)
 	{
 		// Convert string arguments to their correct prototypes
 		Side side = toSide(args[0]);
@@ -28,30 +29,35 @@ namespace cms
 	}
 
 	CommandPtr parseRevokeCommand(const std::string& dealerID,
-		const std::vector<std::string>& args)
+		const std::vector<std::string>& args,
+		DealerManagerPtr dealerManager)
 	{
 		OrderID id = util::toInt(args[0]);	
 		return CommandPtr( new RevokeCommand(dealerID, id) );
 	}
 
 	CommandPtr parseCheckCommand(const std::string& dealerID,
-		const std::vector<std::string>& args)
+		const std::vector<std::string>& args,
+		DealerManagerPtr dealerManager)
 	{
 		OrderID id = util::toInt(args[0]);	
 		return CommandPtr( new CheckCommand(dealerID, id) );
 	}
 
 	CommandPtr parseListCommand(const std::string& dealerID,
-		const std::vector<std::string>& args)
+		const std::vector<std::string>& args,
+		DealerManagerPtr dealerManager)
 	{
 		std::string commodityFilter = (args.size() > 0) ? args[0] : "";
 		std::string dealerFilter = (args.size() > 1) ? args[1] : "";
-		Command* listCommand = new ListCommand(dealerID, commodityFilter, dealerFilter);
+		Command* listCommand = new ListCommand(dealerID, dealerManager,
+			commodityFilter, dealerFilter);
 		return CommandPtr(listCommand);	
 	}
 
-	CommandPtr parseAggressCommand(
-		const std::string& dealerID, const std::vector<std::string>& args)
+	CommandPtr parseAggressCommand(const std::string& dealerID,
+		const std::vector<std::string>& args,
+		DealerManagerPtr dealerManager)
 	{
 		return CommandPtr( reinterpret_cast<Command*>(NULL) );	
 	}

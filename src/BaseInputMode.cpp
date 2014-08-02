@@ -28,9 +28,8 @@ namespace cms
 					CommandPtr command = commandParser->parse(input);
 					std::cout << command->execute(orderManager) << std::endl;
 				}
-				catch (const CMSException& ex)
+				catch (const CMSException& ex) // error messages
 				{
-					// Display exception message
 					std::cout << ex.what() << std::endl;
 				}
 			}

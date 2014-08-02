@@ -60,7 +60,7 @@ namespace cms
 			throw ParseException(errorMessage.str());
 		}
 
-		return typeObject->parser(dealerID, tokens);
+		return typeObject->parser(dealerID, tokens, dealerManager);
 	}
 
 }

@@ -1,5 +1,4 @@
 #include "ListCommand.hpp"
-#include "DealerManager.hpp"
 #include "CMSException.hpp"
 #include <sstream>
 
@@ -36,11 +35,12 @@ namespace cms
 	}
 
 	ListCommand::ListCommand(const std::string& dealerID,
-		const std::string& commodityFilter, const std::string& dealerFilter)
+		DealerManagerPtr dealerManager, const std::string& commodityFilter,
+		const std::string& dealerFilter)
 		: Command("LIST", dealerID), dealerToList(dealerFilter)
 	{
 		// If non-existent dealer was given as filter, throw exception!
-		if (false) // TODO: implement!!!
+		if (!dealerToList.empty() && !dealerManager->isValidDealer(dealerToList))
 		{
 			throw CMSException("UNKNOWN_DEALER");
 		}

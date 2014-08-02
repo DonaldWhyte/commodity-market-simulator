@@ -3,6 +3,7 @@
 
 #include "Command.hpp"
 #include "CommandParseFunctions.hpp"
+#include "DealerManager.hpp"
 #include <vector>
 #include <string>
 
@@ -10,7 +11,8 @@ namespace cms
 {
 
 	typedef CommandPtr (*ParseFunction)(
-		const std::string&, const std::vector<std::string>&);	
+		const std::string&, const std::vector<std::string>&,
+		DealerManagerPtr dealerManager);	
 
 	struct CommandType
 	{

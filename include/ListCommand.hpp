@@ -3,6 +3,7 @@
 
 #include "Command.hpp"
 #include "Order.hpp"
+#include "DealerManager.hpp"
 #include <vector>
 
 namespace cms
@@ -13,6 +14,7 @@ namespace cms
 
 	public:
 		ListCommand(const std::string& dealerID,
+			DealerManagerPtr dealerManager,
 			const std::string& commodityFilter = "",
 			const std::string& dealerFilter = "");
 		virtual ~ListCommand();
