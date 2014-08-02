@@ -1,5 +1,5 @@
 #include "CMSClient.hpp"
-#include <boost/asio.hpp>
+#include "NetworkException.hpp"
 
 namespace cms
 {
@@ -11,8 +11,16 @@ namespace cms
 
 	bool CMSClient::connect()
 	{
-		// TODO
-		return false;
+		try
+		{
+			socket.connect(hostname, port);
+			return true;
+		}
+		// Catch exceptions and return false to indicate connection error
+		catch (const net::NetworkException& ex)
+		{
+			return false;
+		}
 	}
 
 	std::string CMSClient::executeCommand(const std::string& commandStr)

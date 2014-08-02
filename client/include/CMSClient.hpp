@@ -2,6 +2,8 @@
 #define CMS_CMSCLIENT_H
 
 #include <string>
+#include <boost/asio.hpp>
+#include "Socket.hpp"
 
 namespace cms
 {
@@ -23,6 +25,7 @@ namespace cms
 		std::string executeCommand(const std::string& commandStr);
 
 	private:
+		net::Socket socket;
 		std::string hostname;
 		int port;
 
