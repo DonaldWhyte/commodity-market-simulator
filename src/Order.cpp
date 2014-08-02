@@ -14,7 +14,7 @@ namespace cms
 				return static_cast<Commodity>(index);
 			}
 		}
-		throw CMSException(str + " is not a valid commodity");
+		throw CMSException("UNKNOWN_COMMODITY");
 	}
 
 	Side toSide(const std::string& str)
@@ -26,7 +26,7 @@ namespace cms
 				return static_cast<Side>(index);
 			}
 		}
-		throw CMSException(str + " is not a valid side");
+		throw CMSException("UNKNOWN_SIDE");
 	}
 
 	Order::Order(const std::string& dealerID, Side side,

@@ -21,11 +21,12 @@ namespace cms
 			}
 			else
 			{
+				std::cout << "> "; // prefix
 				try
 				{
 					// Parse textual command and execute it
 					CommandPtr command = commandParser->parse(input);
-					std::cout << "> " << command->execute(orderManager) << std::endl;
+					std::cout << command->execute(orderManager) << std::endl;
 				}
 				catch (const CMSException& ex)
 				{
