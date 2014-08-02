@@ -23,8 +23,7 @@ namespace cms
 		bool revokeOrder(OrderID orderID); // returns false if order with given ID is not posted
 		const Order& getOrder(OrderID orderID) const;
 
-		// will revoke order if remaining contracts is 0 (true is returned in this case, false otherwise)
-		const bool sellContracts(OrderID orderID, int amountToSell);
+		const void sellContracts(OrderID orderID, int amountToSell);
 		const OrderCollection& allOrders() const;
 
 	private:

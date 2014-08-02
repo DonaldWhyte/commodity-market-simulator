@@ -45,29 +45,15 @@ namespace cms
 		}
 	}
 
-	const bool OrderManager::sellContracts(OrderID orderID, int amountToSell)
+	const void OrderManager::sellContracts(OrderID orderID, int amountToSell)
 	{
 		Order& foundOrder = getOrderByID(orderID);
 
 		bool success = foundOrder.reduceAmount(amountToSell);
-		if (success) // if there were enough contracts to sell
-		{
-			// Remove order if there are no more contracts to sell
-			if (foundOrder.amount() == 0)
-			{
-				revokeOrder(orderID);
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else // not enough! throw exception
+		if (!success) // not enough contracts to sell! throw exception
 		{
 			throw OrderException("Requested contracts to buy exceeds available contracts");
 		}
-		return false; // stops compiler warnings -- this should never be reached
 	}
 
 	const OrderCollection& OrderManager::allOrders() const
