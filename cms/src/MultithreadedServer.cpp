@@ -82,6 +82,8 @@ namespace cms
 			SocketPtr socketToClient(new ip::tcp::socket(ioService));
 			acceptor.accept(*socketToClient);
 			// Create a thread to handle the new client
+			std::cout << "NEW CLIENT CONNECTED" << std::endl;
+			std::cout << "STARTING THREAD " << threadCounter << std::endl;
 			boost::thread clientSessionThread(boost::bind(
 				clientSession, socketToClient, threadCounter,
 				orderManager, commandParser));
