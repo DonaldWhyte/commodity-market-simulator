@@ -45,6 +45,7 @@ namespace cms
 				// the server by breaking out of the loop
 				if (error == error::eof) // connection cleanly closed
 				{
+					std::cout << "Client has closed connection" << std::endl;
 					break;
 				}
 				else if (error)
@@ -76,6 +77,7 @@ namespace cms
 				std::cout << "Exception occurred in server: " << ex.what() << std::endl;
 			}
 		}
+		std::cout << "TERMINATING SERVER" << std::endl;
 	}
 
 }
