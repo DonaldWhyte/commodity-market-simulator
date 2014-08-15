@@ -32,6 +32,8 @@ namespace cms
 			// Blocks until client sends a request
 			acceptor.accept(*serverSocket);
 
+			// Client has sent command! Parse it, execute it and
+			// then close the connection with the client.
 			try
 			{
 				// Receive command from client
@@ -57,6 +59,8 @@ namespace cms
 
 				std::cout << "SENDING RESULT: " << result << std::endl;
 				serverSocket->send(boost::asio::buffer(&result[0], result.size()));
+
+				serverSocket->close();
 			}
 			catch (std::exception& ex)
 			{
