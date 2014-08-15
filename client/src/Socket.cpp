@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-using boost::asio::ip::tcp;
+using namespace boost::asio;
 
 namespace cms
 {
@@ -25,16 +25,16 @@ namespace cms
 			// number given to a string.
 
 			// Resolve hostname to IP address(es), which are stored
-			// in the tcp::resolver::iterator object
-			tcp::resolver nameResolver(ioService);
-			tcp::resolver::query query(tcp::v4(), hostname, util::fromInt(port));
-			tcp::resolver::iterator endpointIterator = nameResolver.resolve(query);
-			tcp::resolver::iterator iteratorEnd;
+			// in the ip::tcp::resolver::iterator object
+			ip::tcp::resolver nameResolver(ioService);
+			ip::tcp::resolver::query query(ip::tcp::v4(), hostname, util::fromInt(port));
+			ip::tcp::resolver::iterator endpointIterator = nameResolver.resolve(query);
+			ip::tcp::resolver::iterator iteratorEnd;
 
 			tcpSocket = std::tr1::shared_ptr<TCPSocket>(new TCPSocket(ioService));
 			// Try and connect to one of the resolved endpoints
 			// If a connection with neither could be established, throw exception
-			boost::system::error_code error = boost::asio::error::host_not_found;			
+			boost::system::error_code error = error::host_not_found;			
 			while (error && endpointIterator != iteratorEnd)
 			{
 				tcpSocket->connect(*endpointIterator, error);
@@ -65,8 +65,7 @@ namespace cms
 				throw NetworkException("Cannot send data -- socket not connected");
 			}
 		
-			boost::asio::write(*tcpSocket,
-				boost::asio::buffer(&data[0], data.size()));
+			write(*tcpSocket, buffer(&data[0], data.size()));
 		}
 
 		ByteBuffer Socket::receive(size_t maxBytes)
@@ -79,9 +78,9 @@ namespace cms
 			ByteBuffer receivedData(maxBytes);
 			boost::system::error_code error;
 			size_t length = tcpSocket->read_some(
-				boost::asio::buffer(receivedData), error);
+				buffer(receivedData), error);
 
-			if (error == boost::asio::error::eof) // connection cleanly closed
+			if (error == error::eof) // connection cleanly closed
 			{
 				throw NetworkException("Connection with CMS server closed");
 			}
