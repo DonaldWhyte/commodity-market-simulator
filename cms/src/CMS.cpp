@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 	}
 	else if (mode == "ext1")
 	{
-		inputMode = std::tr1::shared_ptr<InputMode>(new TCPInputMode(port, false));
+		inputMode = std::tr1::shared_ptr<InputMode>(new TCPInputMode(port));
 	}
 	else if (mode == "ext2")
 	{

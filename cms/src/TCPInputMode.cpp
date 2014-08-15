@@ -16,8 +16,7 @@ static const unsigned int BUFFER_SIZE = 1024;
 namespace cms
 {
 
-	TCPInputMode::TCPInputMode(int port, bool continuousExecution) :
-		port(port), continuousExecution(continuousExecution)
+	TCPInputMode::TCPInputMode(int port) : port(port)
 	{
 	}
 
