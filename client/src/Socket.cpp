@@ -85,7 +85,10 @@ namespace cms
 
 		void Socket::close()
 		{
-			tcpSocket->close();
+			if (connected())
+			{
+				tcpSocket->close();
+			}
 		}
 
 	}

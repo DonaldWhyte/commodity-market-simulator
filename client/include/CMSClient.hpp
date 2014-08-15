@@ -13,6 +13,13 @@ namespace cms
 
 	public:
 		CMSClient(const std::string& hostname, int port);
+		virtual ~CMSClient();
+
+		/* Connect to CMS server using stored hostname and port. */
+		void connect();
+		/* Terminate connection with CMS server.
+		 * Does nothing if no connection was established. */
+		void disconnect();
 
 		/* Send text command to CMS server.
 		 * Returns server output as string or throws a CMSException
@@ -26,6 +33,7 @@ namespace cms
 		
 		std::string hostname;
 		int port;
+		net::Socket socket;
 
 	};
 

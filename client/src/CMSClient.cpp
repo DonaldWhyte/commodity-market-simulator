@@ -25,16 +25,30 @@ namespace cms
 	{
 	}
 
+	CMSClient::~CMSClient()
+	{
+		socket.close();
+	}
+
+	void CMSClient::connect()
+	{
+		socket.connect(hostname, port);
+	}
+
+	void CMSClient::disconnect()
+	{
+		socket.close();
+	}
+
 	std::string CMSClient::executeCommand(const std::string& commandStr)
 	{
-		// Connect to CMS server via TCP socket
-		net::Socket socket;
-		socket.connect(hostname, port);
 		// Send command to server and receive result
+
+		// TODO: detect sending info / connection error and throw
+		// exception so client is terminated if server has been terminated!!
+
 		socket.send(toByteBuffer(commandStr));
 		std::string result = fromByteBuffer(socket.receive(MAX_BYTES_TO_RECEIVE));
-		// Close connection with CMS server
-		socket.close();
 
 		return result;
 	}

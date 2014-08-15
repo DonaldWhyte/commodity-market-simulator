@@ -27,21 +27,32 @@ namespace cms
 		io_service ioService;
 		ip::tcp::acceptor acceptor(ioService,
 			ip::tcp::endpoint(ip::tcp::v4(), port));
+
+		SocketPtr socketToClient(new ip::tcp::socket(ioService));
+		// Blocks until client sends a request
+		acceptor.accept(*socketToClient);
+		// Client is connected! Serve the connected client
+		// until it disconnects. Then, terminate the server
 		while (true)
 		{
-			SocketPtr serverSocket(new ip::tcp::socket(ioService));
-			// Blocks until client sends a request
-			acceptor.accept(*serverSocket);
-
-			// Client has sent command! Parse it, execute it and
-			// then close the connection with the client.
 			try
 			{
 				// Receive command from client
 				char data[BUFFER_SIZE] = { 0 };
 				boost::system::error_code error;
-				size_t length = serverSocket->read_some(
+				size_t length = socketToClient->read_some(
 					boost::asio::buffer(data), error);
+				// If connection error with client, terminate the session
+				// the server by breaking out of the loop
+				if (error == error::eof) // connection cleanly closed
+				{
+					break;
+				}
+				else if (error)
+				{
+					std::cout << "Connection error with client (error code " << error << ")" << std::endl;
+					break;
+				}
 				std::cout << "RECEIVED COMMAND: " << data << std::endl;
 				// Parse command and execute it
 				// If exception occurs in command parsing or execution,
@@ -59,18 +70,11 @@ namespace cms
 				}
 
 				std::cout << "SENDING RESULT: " << result << std::endl;
-				serverSocket->send(boost::asio::buffer(&result[0], result.size()));
-
-				serverSocket->close();
+				socketToClient->send(boost::asio::buffer(&result[0], result.size()));
 			}
 			catch (std::exception& ex)
 			{
 				std::cout << "Exception occurred in server: " << ex.what() << std::endl;
-			}
-
-			if (!continuousExecution)
-			{
-				break;
 			}
 		}
 	}

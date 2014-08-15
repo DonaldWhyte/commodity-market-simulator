@@ -22,17 +22,23 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	// Start interactive session
+	// Open connection to CMS server
 	CMSClient client(hostname, port);
+	client.connect();
+
+	// Start interactive session
 	std::string input;
 	while (true)
 	{
 		// Get command from user
 		std::getline(std::cin, input);
 
+		// If user wishes to quit the application, make
+		// sure the client has disconnected from the CMS server
 		if (input == "Q" || input == "QUIT"
 			|| input == "q" || input == "quit")
 		{
+			client.disconnect();
 			break;
 		}
 		else
@@ -52,12 +58,13 @@ int main(int argc, char* argv[])
 			}
 			catch (const std::exception& ex) // communication error
 			{
-				std::cout << ex.what() << std::endl;
+				std::cout << "ERROR: " << ex.what() << std::endl;
 				std::cout << "TERMINATING APPLICATION" << std::endl;
+				client.disconnect();
 				break;
 			}
 		}
 	}
 
 	return 0;
-}
+}	
