@@ -77,8 +77,7 @@ namespace cms
 
 			ByteBuffer receivedData(maxBytes);
 			boost::system::error_code error;
-			size_t length = tcpSocket->read_some(
-				buffer(receivedData), error);
+			tcpSocket->read_some(buffer(receivedData), error);
 
 			if (error == error::eof) // connection cleanly closed
 			{
