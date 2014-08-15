@@ -1,14 +1,10 @@
 #include "SingleConnectionServer.hpp"
 #include "CMSException.hpp"
+#include "ServerCommon.hpp"
 #include <iostream>
-#include <boost/asio.hpp>
 #include <tr1/memory>
 
 using namespace boost::asio;
-
-typedef std::tr1::shared_ptr<ip::tcp::socket> SocketPtr;
-
-static const unsigned int BUFFER_SIZE = 1024;
 
 // NOTE: Code inspired from Blocking TCP Server example
 // in Boost 1.52.0 documentation.
@@ -39,8 +35,7 @@ namespace cms
 				// Receive command from client
 				char data[BUFFER_SIZE] = { 0 };
 				boost::system::error_code error;
-				size_t length = socketToClient->read_some(
-					boost::asio::buffer(data), error);
+				socketToClient->read_some(boost::asio::buffer(data), error);
 				// If connection error with client, terminate the session
 				// the server by breaking out of the loop
 				if (error == error::eof) // connection cleanly closed

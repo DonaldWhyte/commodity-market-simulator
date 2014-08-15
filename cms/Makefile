@@ -61,8 +61,8 @@
 MY_CFLAGS = -I./include -I../common/include
 
 # The linker options.
-# Linking Boost.System for Boost.Asio library
-MY_LIBS   = -lboost_system
+# Linking Boost.System to use Boost.Asio library
+MY_LIBS   = -lboost_system -lboost_thread
 
 # The pre-processor options used by the cpp (man cpp for more).
 # NOTE: pthread added for Boost.System library

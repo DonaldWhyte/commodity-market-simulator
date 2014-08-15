@@ -17,6 +17,7 @@ namespace cms
 
 	private:
 		int port; // port that the server will listen on
+		int threadCounter; // counts total number of threads spawned
 		
 	};
 
