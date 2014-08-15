@@ -16,7 +16,8 @@ static const unsigned int BUFFER_SIZE = 1024;
 namespace cms
 {
 
-	TCPInputMode::TCPInputMode(int port) : port(port)
+	TCPInputMode::TCPInputMode(int port, bool continuousExecution) :
+		port(port), continuousExecution(continuousExecution)
 	{
 	}
 
@@ -65,6 +66,11 @@ namespace cms
 			catch (std::exception& ex)
 			{
 				std::cout << "Exception occurred in server: " << ex.what() << std::endl;
+			}
+
+			if (!continuousExecution)
+			{
+				break;
 			}
 		}
 	}
