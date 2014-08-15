@@ -1,4 +1,4 @@
-#include "TCPInputMode.hpp"
+#include "SingleConnectionServer.hpp"
 #include "CMSException.hpp"
 #include <iostream>
 #include <boost/asio.hpp>
@@ -16,11 +16,11 @@ static const unsigned int BUFFER_SIZE = 1024;
 namespace cms
 {
 
-	TCPInputMode::TCPInputMode(int port) : port(port)
+	SingleConnectionServer::SingleConnectionServer(int port) : port(port)
 	{
 	}
 
-	void TCPInputMode::run(OrderManagerPtr orderManager,
+	void SingleConnectionServer::run(OrderManagerPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser)
 	{
 		io_service ioService;

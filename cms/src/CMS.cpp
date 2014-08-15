@@ -1,6 +1,6 @@
 #include <iostream>
 #include "BaseInputMode.hpp"
-#include "TCPInputMode.hpp"
+#include "SingleConnectionServer.hpp"
 #include "MultithreadedServer.hpp"
 #include "Util.hpp"
 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	}
 	else if (mode == "ext1")
 	{
-		inputMode = std::tr1::shared_ptr<InputMode>(new TCPInputMode(port));
+		inputMode = std::tr1::shared_ptr<InputMode>(new SingleConnectionServer(port));
 	}
 	else if (mode == "ext2")
 	{
