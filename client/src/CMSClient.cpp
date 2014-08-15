@@ -43,10 +43,6 @@ namespace cms
 	std::string CMSClient::executeCommand(const std::string& commandStr)
 	{
 		// Send command to server and receive result
-
-		// TODO: detect sending info / connection error and throw
-		// exception so client is terminated if server has been terminated!!
-
 		socket.send(toByteBuffer(commandStr));
 		std::string result = fromByteBuffer(socket.receive(MAX_BYTES_TO_RECEIVE));
 

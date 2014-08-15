@@ -64,7 +64,7 @@ namespace cms
 			{
 				throw NetworkException("Cannot send data -- socket not connected");
 			}
-			
+		
 			boost::asio::write(*tcpSocket,
 				boost::asio::buffer(&data[0], data.size()));
 		}
@@ -80,7 +80,21 @@ namespace cms
 			boost::system::error_code error;
 			size_t length = tcpSocket->read_some(
 				boost::asio::buffer(receivedData), error);
-			return receivedData;
+
+			if (error == boost::asio::error::eof) // connection cleanly closed
+			{
+				throw NetworkException("Connection with CMS server closed");
+			}
+			else if (error)
+			{
+				std::stringstream errorMessage;
+				errorMessage << "Error receiving data (error code: " << error << ")";
+				throw NetworkException(errorMessage.str());
+			}
+			else
+			{
+				return receivedData;
+			}
 		}
 
 		void Socket::close()
