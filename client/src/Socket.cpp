@@ -1,6 +1,10 @@
 #include "Socket.hpp"
 #include "NetworkException.hpp"
 #include "Util.hpp"
+#include <vector>
+#include <algorithm>
+
+#include <iostream>
 
 using boost::asio::ip::tcp;
 
@@ -16,12 +20,14 @@ namespace cms
 
 		void Socket::connect(const std::string& hostname, int port)
 		{
-			// TODO: port!
+			// NOTE: For some reason boost::asio requires port numbers
+			// to be strings, so we need to convert the integer port
+			// number given to a string.
 
 			// Resolve hostname to IP address(es), which are stored
 			// in the tcp::resolver::iterator object
 			tcp::resolver nameResolver(ioService);
-			tcp::resolver::query query(tcp::v4(), hostname, "8080");
+			tcp::resolver::query query(tcp::v4(), hostname, util::fromInt(port));
 			tcp::resolver::iterator endpointIterator = nameResolver.resolve(query);
 			tcp::resolver::iterator iteratorEnd;
 
@@ -52,22 +58,34 @@ namespace cms
 			return connectionEstablished;
 		}
 
-		void Socket::send(const std::string& data)
+		void Socket::send(const ByteBuffer& data)
 		{
 			if (!connected())
 			{
 				throw NetworkException("Cannot send data -- socket not connected");
 			}
-			// TODO
+			
+			boost::asio::write(*tcpSocket,
+				boost::asio::buffer(&data[0], data.size()));
 		}
 
-		std::string Socket::receive()
+		ByteBuffer Socket::receive(size_t maxBytes)
 		{
 			if (!connected())
 			{
 				throw NetworkException("Cannot receive data -- socket not connected");
 			}
-			return "TODO";
+
+			ByteBuffer receivedData(maxBytes);
+			boost::system::error_code error;
+			size_t length = tcpSocket->read_some(
+				boost::asio::buffer(receivedData), error);
+			return receivedData;
+		}
+
+		void Socket::close()
+		{
+			tcpSocket->close();
 		}
 
 	}

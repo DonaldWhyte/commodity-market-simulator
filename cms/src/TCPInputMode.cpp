@@ -1,4 +1,5 @@
 #include "TCPInputMode.hpp"
+#include "CMSException.hpp"
 #include <iostream>
 #include <boost/asio.hpp>
 #include <tr1/memory>
@@ -28,33 +29,40 @@ namespace cms
 		while (true)
 		{
 			SocketPtr serverSocket(new ip::tcp::socket(ioService));
+			// Blocks until client sends a request
 			acceptor.accept(*serverSocket);
 
 			try
 			{
-				while (true)
+				// Receive command from client
+				char data[BUFFER_SIZE] = { 0 };
+				boost::system::error_code error;
+				size_t length = serverSocket->read_some(
+					boost::asio::buffer(data), error);
+				std::cout << "RECEIVED COMMAND: " << data << std::endl;
+				// Parse command and execute it
+				// If exception occurs in command parsing or execution,
+				// then send exception message back to client
+				std::cout << "EXECUTING COMMAND..." << std::endl;
+				std::string result;
+				try
 				{
-					char data[BUFFER_SIZE] = { 0 };
-					boost::system::error_code error;
-					size_t length = serverSocket->read_some(
-						boost::asio::buffer(data), error);
-
-					std::cout << data << std::endl;
-					break;
+					CommandPtr command = commandParser->parse(data);
+				 	result = command->execute(orderManager);
 				}
+				catch (const CMSException& ex)
+				{
+					result = ex.what();
+				}
+
+				std::cout << "SENDING RESULT: " << result << std::endl;
+				serverSocket->send(boost::asio::buffer(&result[0], result.size()));
 			}
 			catch (std::exception& ex)
 			{
 				std::cout << "Exception occurred in server: " << ex.what() << std::endl;
 			}
-
-			/*
-			boost::thread serverThread(
-				boost::bind(session, serverSocket)
-			);*/
 		}
-
-		std::cout << "TODO" << std::endl;
 	}
 
 }

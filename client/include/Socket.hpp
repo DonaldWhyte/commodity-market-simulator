@@ -3,12 +3,18 @@
 
 #include <boost/asio.hpp>
 #include <tr1/memory>
+#include <vector>
 
 namespace cms
 {
 
 	namespace net
 	{
+
+		/* We deal with buffers of bytes when sending/receiving
+		 * data through boost::asio sockets. std::vector<char>
+		 * is used instead of char[] for RAII benefits. */
+		typedef std::vector<char> ByteBuffer;
 
 		class Socket
 		{
@@ -23,9 +29,12 @@ namespace cms
 			bool connected() const;
 
 			/* Send string to connected host. */
-			void send(const std::string& data);
+			void send(const ByteBuffer& data);
 			/* Block until data is received from the connected host. */
-			std::string receive();
+			ByteBuffer receive(size_t maxBytes);
+
+			/* Close connection with host. */
+			void close();
 
 		private:
 			bool connectionEstablished;

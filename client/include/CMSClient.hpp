@@ -14,10 +14,6 @@ namespace cms
 	public:
 		CMSClient(const std::string& hostname, int port);
 
-		/* Connect client to server with stored hostname
-		 * on stored port.  */
-		void connect();
-
 		/* Send text command to CMS server.
 		 * Returns server output as string or throws a CMSException
 		 * if client is not connected to the server or some other
@@ -25,7 +21,9 @@ namespace cms
 		std::string executeCommand(const std::string& commandStr);
 
 	private:
-		net::Socket socket;
+		// Maximum number of bytes to receive from CMS server in one command.
+		static const unsigned int MAX_BYTES_TO_RECEIVE = 1024 * 1024;
+		
 		std::string hostname;
 		int port;
 

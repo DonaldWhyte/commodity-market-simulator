@@ -22,19 +22,8 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	// Create CMS client object to connect to server
-	CMSClient client(hostname, port);
-	try
-	{
-		client.connect();
-	}
-	catch (const CMSException& ex)
-	{
-		std::cout << ex.what() << std::endl;
-		return 1;
-	}
-
 	// Start interactive session
+	CMSClient client(hostname, port);
 	std::string input;
 	while (true)
 	{
