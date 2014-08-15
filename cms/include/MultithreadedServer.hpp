@@ -21,20 +21,6 @@ namespace cms
 			std::tr1::shared_ptr<CommandParser> commandParser);
 
 	private:
-		// TODO: comment
-		void startAsynchronousAccept(OrderManagerPtr orderManager,
-			std::tr1::shared_ptr<CommandParser> commandParser);
-		void stopAsynchronousAccept();
-		void startAccept();
-		void handleAccept(SocketPtr socket);
-
-		typedef std::tr1::shared_ptr<boost::asio::io_service> IOServicePtr;
-		typedef std::tr1::shared_ptr<boost::asio::ip::tcp::acceptor> AcceptorPtr;
-
-		ClientThreadManagerPtr clientThreadManager;
-		IOServicePtr ioService;
-		AcceptorPtr acceptor;
-	
 		int port; // port that the server will listen on
 		
 	};
