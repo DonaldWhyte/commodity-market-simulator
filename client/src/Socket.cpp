@@ -52,6 +52,24 @@ namespace cms
 			return connectionEstablished;
 		}
 
+		void Socket::send(const std::string& data)
+		{
+			if (!connected())
+			{
+				throw NetworkException("Cannot send data -- socket not connected");
+			}
+			// TODO
+		}
+
+		std::string Socket::receive()
+		{
+			if (!connected())
+			{
+				throw NetworkException("Cannot receive data -- socket not connected");
+			}
+			return "TODO";
+		}
+
 	}
 
 }

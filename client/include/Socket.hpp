@@ -22,6 +22,11 @@ namespace cms
 			/* Return true if socket is connected to server and false otherwise. */
 			bool connected() const;
 
+			/* Send string to connected host. */
+			void send(const std::string& data);
+			/* Block until data is received from the connected host. */
+			std::string receive();
+
 		private:
 			bool connectionEstablished;
 

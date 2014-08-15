@@ -16,7 +16,8 @@ namespace cms
 
 	std::string CMSClient::executeCommand(const std::string& commandStr)
 	{
-		return "TODO";
+		socket.send(commandStr);
+		return socket.receive();
 	}
 
 }
