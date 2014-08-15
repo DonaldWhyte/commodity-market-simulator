@@ -1,6 +1,7 @@
 #include <iostream>
 #include "BaseInputMode.hpp"
 #include "TCPInputMode.hpp"
+#include "MultithreadedServer.hpp"
 #include "Util.hpp"
 
 using namespace cms;
@@ -41,7 +42,7 @@ int main(int argc, char* argv[])
 	}
 	else if (mode == "ext2")
 	{
-		return 2;
+		inputMode = std::tr1::shared_ptr<InputMode>(new MultithreadedServer(port));
 	}
 	else
 	{
