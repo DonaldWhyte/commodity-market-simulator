@@ -75,6 +75,7 @@ namespace cms
 	{
 		if (logActivities)
 		{
+			std::cout << "NEW CLIENT CONNECTED" << std::endl;
 			std::cout << "STARTING THREAD " << threadCounter << std::endl;
 		}
 
@@ -97,7 +98,6 @@ namespace cms
 			std::cout << "THREAD " << threadNo << " STOPPED" << std::endl;
 		}
 		numActiveThreads--;
-		std::cout << numActiveThreads << std::endl;
 	}
 
 	bool ClientThreadManager::loggingEnabled() const

@@ -4,6 +4,7 @@
 #include "OrderManager.hpp"
 #include "CommandParser.hpp"
 #include "ServerCommon.hpp"
+#include <tr1/memory>
 
 namespace cms
 {
@@ -32,12 +33,14 @@ namespace cms
 	private:
 		OrderManagerPtr orderManager;
 		std::tr1::shared_ptr<CommandParser> commandParser;
-		
+
 		bool logActivities; // if true, activities of threads are logged
 		int threadCounter; // used to assign threads numbers
 		int numActiveThreads; // number of actively running threads remaining
 
 	};
+
+	typedef std::tr1::shared_ptr<ClientThreadManager> ClientThreadManagerPtr;
 
 }
 
