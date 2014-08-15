@@ -2,6 +2,7 @@
 #define CMS_NET_SOCKET_H
 
 #include <boost/asio.hpp>
+#include <tr1/memory>
 
 namespace cms
 {
@@ -23,6 +24,12 @@ namespace cms
 
 		private:
 			bool connectionEstablished;
+
+			boost::asio::io_service ioService;
+			// Typedef'd simply for more concise code
+			typedef boost::asio::ip::tcp::socket TCPSocket;
+			std::tr1::shared_ptr<TCPSocket> tcpSocket;
+
 
 		};
 

@@ -9,18 +9,9 @@ namespace cms
 	{
 	}
 
-	bool CMSClient::connect()
+	void CMSClient::connect()
 	{
-		try
-		{
-			socket.connect(hostname, port);
-			return true;
-		}
-		// Catch exceptions and return false to indicate connection error
-		catch (const net::NetworkException& ex)
-		{
-			return false;
-		}
+		socket.connect(hostname, port);
 	}
 
 	std::string CMSClient::executeCommand(const std::string& commandStr)

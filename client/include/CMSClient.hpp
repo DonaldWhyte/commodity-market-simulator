@@ -14,9 +14,9 @@ namespace cms
 	public:
 		CMSClient(const std::string& hostname, int port);
 
-		/* Connect client to server. Returns true if connection
-		 * was successful and false otherwise. */
-		bool connect();
+		/* Connect client to server with stored hostname
+		 * on stored port.  */
+		void connect();
 
 		/* Send text command to CMS server.
 		 * Returns server output as string or throws a CMSException

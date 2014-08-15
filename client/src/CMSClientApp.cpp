@@ -1,5 +1,6 @@
 #include "CMSClient.hpp"
 #include "Util.hpp"
+#include "CMSException.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -23,9 +24,13 @@ int main(int argc, char* argv[])
 
 	// Create CMS client object to connect to server
 	CMSClient client(hostname, port);
-	if (!client.connect())
+	try
 	{
-		std::cout << "Failed to connect to " << hostname << " on port " << port << std::endl;
+		client.connect();
+	}
+	catch (const CMSException& ex)
+	{
+		std::cout << ex.what() << std::endl;
 		return 1;
 	}
 
