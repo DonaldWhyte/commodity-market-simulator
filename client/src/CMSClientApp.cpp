@@ -6,6 +6,8 @@
 
 using namespace cms;
 
+static const std::string TERMINATION_MESSAGE = "TERMINATING CLIENT";
+
 int main(int argc, char* argv[])
 {
 	// Parse command line arguments
@@ -24,7 +26,16 @@ int main(int argc, char* argv[])
 
 	// Open connection to CMS server
 	CMSClient client(hostname, port);
-	client.connect();
+	try
+	{
+		client.connect();
+	}
+	catch (const CMSException& ex)
+	{
+		std::cout << ex.what() << std::endl;
+		std::cout << TERMINATION_MESSAGE << std::endl;
+		return 1;
+	}
 
 	// Start interactive session
 	std::string input;
@@ -59,12 +70,13 @@ int main(int argc, char* argv[])
 			catch (const std::exception& ex) // communication error
 			{
 				std::cout << "ERROR: " << ex.what() << std::endl;
-				std::cout << "TERMINATING APPLICATION" << std::endl;
 				client.disconnect();
 				break;
 			}
 		}
 	}
+
+	std::cout << TERMINATION_MESSAGE << std::endl;
 
 	return 0;
 }	
