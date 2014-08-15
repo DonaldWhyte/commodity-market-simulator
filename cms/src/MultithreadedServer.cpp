@@ -44,7 +44,8 @@ namespace cms
 		// Construct object which handles creation of client
 		// threads and keeps track of their 
 		ClientThreadManagerPtr clientThreadManager(
-			new ClientThreadManager(orderManager, commandParser, true));
+			new ClientThreadManager(orderManager, commandParser,
+				THREAD_LOGGING_ENABLED));
 
 		// Fire off thread to listen for new client connections
 		// This new thread handles accepting connections, while

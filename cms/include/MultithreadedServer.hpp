@@ -8,7 +8,8 @@
 namespace cms
 {
 
-	// TODO: comment
+	// Set to true if the CMS server should log when
+	// threads are created/destroyed 
 	static const bool THREAD_LOGGING_ENABLED = true;
 
 	class MultithreadedServer : public InputMode
