@@ -67,12 +67,15 @@ namespace cms
 	ClientThreadManager::ClientThreadManager(OrderManagerPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser, bool logActivities)
 		: orderManager(orderManager), commandParser(commandParser),
-		logActivities(logActivities), threadCounter(0), numActiveThreads(0)
+		logActivities(logActivities),
+		threadCounterLock(0), numActiveThreadsLock(0)
 	{
 	}
 
 	int ClientThreadManager::start(SocketPtr socket)
 	{
+		int threadCounter = threadCounterLock.getCopy();
+
 		if (logActivities)
 		{
 			std::cout << "NEW CLIENT CONNECTED" << std::endl;
@@ -85,8 +88,8 @@ namespace cms
 			this, orderManager, commandParser));
 		clientSessionThread.detach();
 
-		threadCounter++;
-		numActiveThreads++;
+		incrementThreadCounter();
+		incrementActiveThreads();
 
 		return threadNo;
 	}
@@ -97,7 +100,8 @@ namespace cms
 		{
 			std::cout << "THREAD " << threadNo << " STOPPED" << std::endl;
 		}
-		numActiveThreads--;
+
+		decrementActiveThreads();
 	}
 
 	bool ClientThreadManager::loggingEnabled() const
@@ -110,9 +114,30 @@ namespace cms
 		this->logActivities = logActivities;
 	}
 
-	int ClientThreadManager::activeThreads() const
+	int ClientThreadManager::activeThreads()
 	{
-		return numActiveThreads;
+		return numActiveThreadsLock.getCopy();
+	}
+
+	void ClientThreadManager::incrementThreadCounter()
+	{
+		int* threadCounter = threadCounterLock.acquire();
+		(*threadCounter)++;
+		threadCounterLock.release();
+	}
+
+	void ClientThreadManager::incrementActiveThreads()
+	{
+		int* numActiveThreads = numActiveThreadsLock.acquire();
+		(*numActiveThreads)++;
+		numActiveThreadsLock.release();
+	}
+
+	void ClientThreadManager::decrementActiveThreads()
+	{
+		int* numActiveThreads = numActiveThreadsLock.acquire();
+		(*numActiveThreads)--;
+		numActiveThreadsLock.release();
 	}
 
 

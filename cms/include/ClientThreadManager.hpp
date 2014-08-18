@@ -4,6 +4,7 @@
 #include "OrderManager.hpp"
 #include "CommandParser.hpp"
 #include "ServerCommon.hpp"
+#include "Lock.hpp"
 #include <tr1/memory>
 
 namespace cms
@@ -28,15 +29,21 @@ namespace cms
 		/* Enables/disables thread logging. */
 		void setLogging(bool logActivities);
 
-		int activeThreads() const;
+		/* Return number of threads currently active. */
+		int activeThreads();
 
 	private:
+		void incrementThreadCounter();
+		void incrementActiveThreads();
+		void decrementActiveThreads();
+
 		OrderManagerPtr orderManager;
 		std::tr1::shared_ptr<CommandParser> commandParser;
 
 		bool logActivities; // if true, activities of threads are logged
-		int threadCounter; // used to assign threads numbers
-		int numActiveThreads; // number of actively running threads remaining
+
+		Lock<int> threadCounterLock; // used to assign threads numbers
+		Lock<int> numActiveThreadsLock; // number of actively running threads remaining
 
 	};
 
