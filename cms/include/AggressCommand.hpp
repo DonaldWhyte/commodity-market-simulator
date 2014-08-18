@@ -8,9 +8,16 @@
 namespace cms
 {
 
-	// TODO: make error messages follow specification
-	// TODO: determine how to handle interleaved success/errors
-	//       with multiple aggressions (just list all in newlines???)
+	/*
+	 * NOTE: In the CMS specification, how the trade reports
+	 * of several aggressions are displayed to the user has
+	 * not been specified. 
+	 *
+	 * When contracts from several orders are bought/sold, a
+	 * TRADE_REPORT string for each order is generated. These
+	 * are separated by newlines when they are displayed to
+	 * the user.
+	*/
 
 	typedef std::pair<OrderID, unsigned int> OrderAggressAmount;
 

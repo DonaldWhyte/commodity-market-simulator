@@ -45,7 +45,7 @@ namespace cms
 		const CommandType* typeObject = getCommandType(typeStr);
 		if (!typeObject)
 		{
-			throw ParseException(typeStr + " is not a valid command");
+			throw ParseException("INVALID_COMMAND");
 		}
 
 		// Remove first two entries of tokens, so only command args remain
