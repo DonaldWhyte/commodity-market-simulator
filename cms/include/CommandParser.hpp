@@ -1,7 +1,7 @@
 #ifndef CMS_COMMANDPARSER_H
 #define CMS_COMMANDPARSER_H
 
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 #include "Command.hpp"
 #include "DealerManager.hpp"
 

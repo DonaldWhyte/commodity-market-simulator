@@ -16,7 +16,7 @@ namespace cms
 	 * connected clients have disconnected. */
 	void runListenerThread(int port,
 		ClientThreadManagerPtr clientThreadManager,
-		std::tr1::shared_ptr<bool> running)
+		boost::shared_ptr<bool> running)
 	{
 		io_service ioService;
 		ip::tcp::acceptor acceptor(ioService,
@@ -39,7 +39,7 @@ namespace cms
 	}
 
 	void MultithreadedServer::run(OrderManagerLockPtr orderManager,
-		std::tr1::shared_ptr<CommandParser> commandParser)
+		boost::shared_ptr<CommandParser> commandParser)
 	{
 		// Construct object which handles creation of client
 		// threads and keeps track of their 
@@ -52,7 +52,7 @@ namespace cms
 		// the current (main) thread monitors how many active
 		// connections there are (terminating server where 
 		// all clients have disconnected)
-		std::tr1::shared_ptr<bool> running(new bool(true));
+		boost::shared_ptr<bool> running(new bool(true));
 		boost::thread listenerThread(boost::bind(
 			&runListenerThread, port, clientThreadManager, running));
 		listenerThread.detach();

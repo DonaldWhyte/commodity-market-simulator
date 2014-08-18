@@ -5,7 +5,7 @@
 #include "CommandParser.hpp"
 #include "ServerCommon.hpp"
 #include "Lock.hpp"
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 
 namespace cms
 {
@@ -15,7 +15,7 @@ namespace cms
 
 	public:
 		ClientThreadManager(OrderManagerLockPtr orderManager,
-			std::tr1::shared_ptr<CommandParser> commandParser,
+			boost::shared_ptr<CommandParser> commandParser,
 			bool logActivities);
 
 		/* Start new thread that uses given socket to communicate with client.
@@ -38,7 +38,7 @@ namespace cms
 		void decrementActiveThreads();
 
 		OrderManagerLockPtr orderManager;
-		std::tr1::shared_ptr<CommandParser> commandParser;
+		boost::shared_ptr<CommandParser> commandParser;
 
 		bool logActivities; // if true, activities of threads are logged
 
@@ -47,7 +47,7 @@ namespace cms
 
 	};
 
-	typedef std::tr1::shared_ptr<ClientThreadManager> ClientThreadManagerPtr;
+	typedef boost::shared_ptr<ClientThreadManager> ClientThreadManagerPtr;
 
 }
 

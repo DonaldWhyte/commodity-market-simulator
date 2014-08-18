@@ -13,7 +13,7 @@ namespace cms
 		SingleConnectionServer(int port);
 		
 		virtual void run(OrderManagerLockPtr orderManager,
-			std::tr1::shared_ptr<CommandParser> commandParser);
+			boost::shared_ptr<CommandParser> commandParser);
 
 	private:
 		// Port that the server will listen on

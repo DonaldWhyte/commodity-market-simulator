@@ -7,7 +7,7 @@ namespace cms
 {
 
 
-	typedef std::tr1::shared_ptr<boost::asio::ip::tcp::socket> SocketPtr;
+	typedef boost::shared_ptr<boost::asio::ip::tcp::socket> SocketPtr;
 
 	/* Size of input/output buffers (in bytes) used for socket communication. */
 	static const unsigned int BUFFER_SIZE = 1024;

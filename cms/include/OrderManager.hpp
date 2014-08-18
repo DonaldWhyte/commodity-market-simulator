@@ -1,7 +1,7 @@
 #ifndef CMS_ORDERMANAGER_H
 #define CMS_ORDERMANAGER_H
 
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 #include <map>
 #include "Order.hpp"
 #include "CMSException.hpp"
@@ -34,8 +34,8 @@ namespace cms
 
 	};
 
-	typedef std::tr1::shared_ptr<OrderManager> OrderManagerPtr;
-	typedef std::tr1::shared_ptr<Lock<OrderManagerPtr> > OrderManagerLockPtr;
+	typedef boost::shared_ptr<OrderManager> OrderManagerPtr;
+	typedef boost::shared_ptr<Lock<OrderManagerPtr> > OrderManagerLockPtr;
 
 	class OrderException : public CMSException
 	{

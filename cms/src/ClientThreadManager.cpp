@@ -14,7 +14,7 @@ namespace cms
 	void clientSession(SocketPtr socket, int threadNo,
 		ClientThreadManager* threadManager,
 		OrderManagerLockPtr orderManager,
-		std::tr1::shared_ptr<CommandParser> commandParser)
+		boost::shared_ptr<CommandParser> commandParser)
 	{
 		try
 		{
@@ -65,7 +65,7 @@ namespace cms
 	}
 
 	ClientThreadManager::ClientThreadManager(OrderManagerLockPtr orderManager,
-		std::tr1::shared_ptr<CommandParser> commandParser, bool logActivities)
+		boost::shared_ptr<CommandParser> commandParser, bool logActivities)
 		: orderManager(orderManager), commandParser(commandParser),
 		logActivities(logActivities),
 		threadCounterLock(0), numActiveThreadsLock(0)

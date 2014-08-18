@@ -2,7 +2,7 @@
 #include "CMSException.hpp"
 #include "ServerCommon.hpp"
 #include <iostream>
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 
 using namespace boost::asio;
 
@@ -17,7 +17,7 @@ namespace cms
 	}
 
 	void SingleConnectionServer::run(OrderManagerLockPtr orderManager,
-		std::tr1::shared_ptr<CommandParser> commandParser)
+		boost::shared_ptr<CommandParser> commandParser)
 	{
 		io_service ioService;
 		ip::tcp::acceptor acceptor(ioService,

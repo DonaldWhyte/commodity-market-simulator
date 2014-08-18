@@ -1,7 +1,7 @@
 #ifndef CMS_COMMAND_H
 #define CMS_COMMAND_H
 
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 #include <string>
 #include "OrderManager.hpp"
 
@@ -31,7 +31,7 @@ namespace cms
 
 	};
 
-	typedef std::tr1::shared_ptr<Command> CommandPtr;
+	typedef boost::shared_ptr<Command> CommandPtr;
 
 }
 

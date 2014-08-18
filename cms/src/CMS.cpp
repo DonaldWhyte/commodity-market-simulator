@@ -31,18 +31,18 @@ int main(int argc, char* argv[])
 	}
 
 	// Instantiate required InputMode class
-	std::tr1::shared_ptr<InputMode> inputMode( reinterpret_cast<InputMode*>(NULL) );
+	boost::shared_ptr<InputMode> inputMode( reinterpret_cast<InputMode*>(NULL) );
 	if (mode == "base")
 	{
-		inputMode = std::tr1::shared_ptr<InputMode>(new BaseInputMode());
+		inputMode = boost::shared_ptr<InputMode>(new BaseInputMode());
 	}
 	else if (mode == "ext1")
 	{
-		inputMode = std::tr1::shared_ptr<InputMode>(new SingleConnectionServer(port));
+		inputMode = boost::shared_ptr<InputMode>(new SingleConnectionServer(port));
 	}
 	else if (mode == "ext2")
 	{
-		inputMode = std::tr1::shared_ptr<InputMode>(new MultithreadedServer(port));
+		inputMode = boost::shared_ptr<InputMode>(new MultithreadedServer(port));
 	}
 	else
 	{
@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 			OrderManagerPtr(new OrderManager())
 		)
 	);
-	std::tr1::shared_ptr<CommandParser> commandParser(
+	boost::shared_ptr<CommandParser> commandParser(
 		new CommandParser(dealerManager)
 	);
 	inputMode->run(orderManager, commandParser);

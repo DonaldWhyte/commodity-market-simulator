@@ -31,7 +31,7 @@ namespace cms
 			ip::tcp::resolver::iterator endpointIterator = nameResolver.resolve(query);
 			ip::tcp::resolver::iterator iteratorEnd;
 
-			tcpSocket = std::tr1::shared_ptr<TCPSocket>(new TCPSocket(ioService));
+			tcpSocket = boost::shared_ptr<TCPSocket>(new TCPSocket(ioService));
 			// Try and connect to one of the resolved endpoints
 			// If a connection with neither could be established, throw exception
 			boost::system::error_code error = error::host_not_found;			

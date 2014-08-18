@@ -6,7 +6,7 @@ namespace cms
 {
 
 	void BaseInputMode::run(OrderManagerLockPtr orderManager,
-		std::tr1::shared_ptr<CommandParser> commandParser)
+		boost::shared_ptr<CommandParser> commandParser)
 	{
 		std::string input;
 

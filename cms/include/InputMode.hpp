@@ -2,7 +2,7 @@
 #define CMS_INPUTMODE_H
 
 #include <iostream>
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 #include "CommandParser.hpp"
 #include "OrderManager.hpp"
 
@@ -14,7 +14,7 @@ namespace cms
 
 	public:
 		virtual void run(OrderManagerLockPtr orderManager,
-			std::tr1::shared_ptr<CommandParser> commandParser) = 0;
+			boost::shared_ptr<CommandParser> commandParser) = 0;
 
 	};
 

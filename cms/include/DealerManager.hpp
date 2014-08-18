@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <tr1/memory>
+#include <boost/shared_ptr.hpp>
 
 namespace cms
 {
@@ -24,7 +24,7 @@ namespace cms
 
 	};
 
-	typedef std::tr1::shared_ptr<DealerManager> DealerManagerPtr;
+	typedef boost::shared_ptr<DealerManager> DealerManagerPtr;
 
 }
 
