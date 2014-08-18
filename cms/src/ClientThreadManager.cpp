@@ -13,7 +13,7 @@ namespace cms
 
 	void clientSession(SocketPtr socket, int threadNo,
 		ClientThreadManager* threadManager,
-		OrderManagerPtr orderManager,
+		OrderManagerLockPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser)
 	{
 		try
@@ -44,7 +44,7 @@ namespace cms
 				try
 				{
 					CommandPtr command = commandParser->parse(data);
-				 	result = command->execute(orderManager);
+				 	result = command->run(orderManager);
 				}
 				catch (const CMSException& ex)
 				{
@@ -64,7 +64,7 @@ namespace cms
 		threadManager->threadStopped(threadNo);
 	}
 
-	ClientThreadManager::ClientThreadManager(OrderManagerPtr orderManager,
+	ClientThreadManager::ClientThreadManager(OrderManagerLockPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser, bool logActivities)
 		: orderManager(orderManager), commandParser(commandParser),
 		logActivities(logActivities),

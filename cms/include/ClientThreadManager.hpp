@@ -14,7 +14,7 @@ namespace cms
 	{
 
 	public:
-		ClientThreadManager(OrderManagerPtr orderManager,
+		ClientThreadManager(OrderManagerLockPtr orderManager,
 			std::tr1::shared_ptr<CommandParser> commandParser,
 			bool logActivities);
 
@@ -37,7 +37,7 @@ namespace cms
 		void incrementActiveThreads();
 		void decrementActiveThreads();
 
-		OrderManagerPtr orderManager;
+		OrderManagerLockPtr orderManager;
 		std::tr1::shared_ptr<CommandParser> commandParser;
 
 		bool logActivities; // if true, activities of threads are logged

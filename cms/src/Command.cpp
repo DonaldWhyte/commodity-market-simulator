@@ -8,6 +8,27 @@ namespace cms
 	{
 	}
 
+	std::string Command::run(OrderManagerLockPtr orderManagerLock)
+	{
+		try
+		{
+			OrderManagerPtr orderManager = *(orderManagerLock->acquire());
+			std::string output = execute(orderManager);
+			orderManagerLock->release();
+			return output;
+		}
+		catch (const CMSException& ex)
+		{
+			orderManagerLock->release();
+			throw ex;
+		}
+		catch (const std::exception& ex)
+		{
+			orderManagerLock->release();
+			throw ex;
+		}
+	}
+
 	const std::string& Command::type() const
 	{
 		return cmdType;

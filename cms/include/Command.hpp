@@ -17,9 +17,15 @@ namespace cms
 		const std::string& type() const;
 		const std::string& dealerID() const;
 
-		virtual std::string execute(OrderManagerPtr orderManager) = 0;
+		/* Executes command. If exception is thrown, it is caught
+		 * and its error message is contained within the returned string. */
+		virtual std::string run(OrderManagerLockPtr orderManagerLock);
 
 	private:
+		/* Where command-specific logic is actually executed. 
+		 * Each Command type must implement this. */
+		virtual std::string execute(OrderManagerPtr orderManager) = 0;
+
 		std::string cmdType;
 		std::string cmdDealerID;
 

@@ -5,7 +5,7 @@
 namespace cms
 {
 
-	void BaseInputMode::run(OrderManagerPtr orderManager,
+	void BaseInputMode::run(OrderManagerLockPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser)
 	{
 		std::string input;
@@ -27,7 +27,7 @@ namespace cms
 				{
 					// Parse textual command and execute it
 					CommandPtr command = commandParser->parse(input);
-					output = command->execute(orderManager);
+					output = command->run(orderManager);
 				}
 				catch (const CMSException& ex)
 				{

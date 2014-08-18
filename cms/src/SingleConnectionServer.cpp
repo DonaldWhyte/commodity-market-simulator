@@ -16,7 +16,7 @@ namespace cms
 	{
 	}
 
-	void SingleConnectionServer::run(OrderManagerPtr orderManager,
+	void SingleConnectionServer::run(OrderManagerLockPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser)
 	{
 		io_service ioService;
@@ -57,7 +57,7 @@ namespace cms
 				try
 				{
 					CommandPtr command = commandParser->parse(data);
-				 	result = command->execute(orderManager);
+				 	result = command->run(orderManager);
 				}
 				catch (const CMSException& ex)
 				{

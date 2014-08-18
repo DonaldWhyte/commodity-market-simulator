@@ -38,7 +38,7 @@ namespace cms
 	{
 	}
 
-	void MultithreadedServer::run(OrderManagerPtr orderManager,
+	void MultithreadedServer::run(OrderManagerLockPtr orderManager,
 		std::tr1::shared_ptr<CommandParser> commandParser)
 	{
 		// Construct object which handles creation of client

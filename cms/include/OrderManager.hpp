@@ -5,6 +5,7 @@
 #include <map>
 #include "Order.hpp"
 #include "CMSException.hpp"
+#include "Lock.hpp"
 
 namespace cms
 {
@@ -34,6 +35,7 @@ namespace cms
 	};
 
 	typedef std::tr1::shared_ptr<OrderManager> OrderManagerPtr;
+	typedef std::tr1::shared_ptr<Lock<OrderManagerPtr> > OrderManagerLockPtr;
 
 	class OrderException : public CMSException
 	{

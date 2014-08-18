@@ -12,7 +12,7 @@ namespace cms
 	public:
 		SingleConnectionServer(int port);
 		
-		virtual void run(OrderManagerPtr orderManager,
+		virtual void run(OrderManagerLockPtr orderManager,
 			std::tr1::shared_ptr<CommandParser> commandParser);
 
 	private:
