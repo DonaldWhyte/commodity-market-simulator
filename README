@@ -1,15 +1,42 @@
 Commodities Market System (CMS)
 Author: Donald Whyte
 ===============================================================================
-TODO: project description
+This project simulates an electronic trading platform for commodities contracts.
+
+CMS allows dealers to list the contracts they have available to buy or sell, 
+referred to as posting orders, and allows other dealers to trade these orders,
+referred to as aggressing on orders. Dealers can modify and revoke their
+orders, as well as query orders currently available.
+
+The system is developed entirely in C++. The base CMS program accepts dealer
+commands as input through stdin and outputs the results of these commands via
+stdout (i.e. input/output is done through the console).
 
 IMPLEMENTED EXTENSIONS
 ===============================================================================
-TODO
+Extension 1 and Extension 2 have been implemented as server applications.
+These accept dealer commands via TCP connections, sending command results
+back to clients via the same connection.
+
+A separate client application has been created to to test extension 1 and 2. 
+This application takes the hostname/IP address and port of the server and
+establishes a connection. It then allows the user to enter commands which are
+sent to the server and executed server-side. The output is sent back to the
+client, where it is displayed to the user.
+
+The source files for this application are stored in the 'client' folder.
 
 THIRD-PARTY LIBRARIES
 ===============================================================================
-TODO
+In addition to the C++ standard library, the following third-party libraries
+were used:
+    * Boost.Asio
+    * Boost.Memory
+    * Boost.Smart_Ptr
+    * Boost.System
+    * Boost.Thread
+
+The minimum supported Boost version is 1.46.1.
 
 DESIGN OVERVIEW
 ===============================================================================
@@ -17,12 +44,38 @@ TODO: brief high-level design overview
 
 COMPILATION GUIDE
 ===============================================================================
-TODO: how to build program
+gmake makefiles are provided for each executable. These makefiles assume that
+Boost has been installed in the system's include and library directories. On
+Unix-based systems, the system include and library directories are typically
+/usr/include and /usr/libs respectively.
+
+To compile the main CMS application, navigate to the 'cms' directory and type
+'make'. The generated executable is called 'cms'.
+
+To compile the CMS client application, navigate to the 'cms' directory and type
+'make'. The generated executable is called 'cmsclient'.
 
 USAGE GUIDE
 ===============================================================================
-TODO: how to run program
+The CMS program is executed as described in the given specification.
+The first argument is the input mode, which is used to enable the extensions,
+and the second argument is the port number (used by the extensions).
+
+Arguments:
+	./cms {base|ext1|ext2} <portNo>
+
+The CMS client application requires the hostname and port of the CMS server, which is executed by using the two extensions in the CMS program. 
+
+Arguments:
+	./cmsclient <hostname> <port>
+
+Note that an IP address can be used instead of a hostname. 'localhost' or
+'127.0.0.1' should be used as the hostname if the CMS server is running on the same machine as the client.
+
+EXECUTING TEST SUITE
+===============================================================================
+TODO
 
 KNOWN ISSUES
 ===============================================================================
-TODO: any known bugs
+There are no known bugs in any of the CMS applications at this time.
