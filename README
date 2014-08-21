@@ -40,14 +40,56 @@ The minimum supported Boost version is 1.46.1.
 
 DESIGN OVERVIEW
 ===============================================================================
-TODO: brief high-level design overview
+There are three main 'modules' to the application.
+    * client -- contains all the source code for the CMS client application
+    * cms -- contains source code for parsing and executing commands,
+             managing dealers and orders, as well as handling user input
+             (whether that's through the command line or through TCP
+             connections)
+    * common -- contains functionality used by both the client and cms modules
+
+The following process is executed when CMS receives a dealer command:
+    1) The command, currently text, is parsed using the CommandParser class.
+       This results in an instance of the Command class.
+    2) The command is executed by calling Command::run(), passing the
+       application-wide instance of OrderManager. OrderManager is the class
+       which stores all currently available orders, and can post, revoke
+       or aggress those orders.
+    3) Command::run() returns a string which is displayed to the user on the
+       command line. If the extensions are used, this string is send back to
+       the client using the same TCP connection the client used to send the
+       original command.
+
+All commands are children of the Command abstract class. Through polymorphism and multiple global lists, news command easily be added to the system. To
+create a new command, these steps must be followed:
+    1) Implement the command's functionality by creating a subclass of Command
+    2) Implement a function which parses the textual command and returns
+       an instance of the command's class, placing the function in the file
+       cms/include/CommandParseFunctions.hpp
+    2) Add the command to the command types list in
+       cms/include/CommandTypes.hpp. This list stores the identifier for the
+       command (e.g. "POST", "LIST"), its minimum required arguments and the function which parses the command.
+
+Currently, dealers are hard-coded into the system. However, the hard-coded
+dealer list is wrapped inside the DealerManager class. This means other ways
+of creating/loading dealers can be implemented without affecting the rest
+of the system.
+
+Extension 2 allows several clients to send commands to CMS at the same time. If these commands modify orders, then there is the possibility of race
+conditions occurring. Synchronisation mechanisms have been put in place to
+prevent these from occurring. Specifically, mutex locks have been used 
+within the ClientThreadManager class and on the application-wide OrderManager
+instance. These ensure that only client can modify orders at a time.
+
+TODO: mention how the purpose of each class has been documented via comment
+headers above each class
 
 COMPILATION GUIDE
 ===============================================================================
 gmake makefiles are provided for each executable. These makefiles assume that
 Boost has been installed in the system's include and library directories. On
 Unix-based systems, the system include and library directories are typically
-/usr/include and /usr/libs respectively.
+/usr/include and /usr/lib respectively.
 
 To compile the main CMS application, navigate to the 'cms' directory and type
 'make'. The generated executable is called 'cms'.
