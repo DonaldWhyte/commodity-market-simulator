@@ -1,3 +1,9 @@
+/* Don't define main() function to client executable
+ * if tests are running. This is to prevent multiple
+ * main() functions from being defined, which is
+ * disallowed by the compiler. */
+#ifndef TESTS_RUNNING
+
 #include <iostream>
 #include "BaseInputMode.hpp"
 #include "SingleConnectionServer.hpp"
@@ -64,3 +70,5 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
+
+#endif
