@@ -57,7 +57,7 @@
 ##==========================================================================
 
 # The pre-processor and compiler options.
-MY_CFLAGS = -I../cms/include -I../client/cmsinclude -I../common/include
+MY_CFLAGS = -I./include -I../cms/include -I../client/cmsinclude -I../common/include
 
 # The linker options.
 # Linking Boost.System to use Boost.Asio library
