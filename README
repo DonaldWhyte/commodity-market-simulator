@@ -67,9 +67,10 @@ create a new command, these steps must be followed:
     2) Implement a function which parses the textual command and returns
        an instance of the command's class, placing the function in the file
        cms/include/CommandParseFunctions.hpp
-    2) Add the command to the command types list in
+    3) Add the command to the command types list in
        cms/include/CommandTypes.hpp. This list stores the identifier for the
-       command (e.g. "POST", "LIST"), its minimum required arguments and the function which parses the command.
+       command (e.g. "POST", "LIST"), its minimum required arguments and the
+       function which parses the command.
 
 Currently, dealers are hard-coded into the system. However, the hard-coded
 dealer list is wrapped inside the DealerManager class. This means other ways
@@ -115,7 +116,8 @@ Arguments:
 	./cmsclient <hostname> <port>
 
 Note that an IP address can be used instead of a hostname. 'localhost' or
-'127.0.0.1' should be used as the hostname if the CMS server is running on the same machine as the client.
+'127.0.0.1' should be used as the hostname if the CMS server is running on the
+same machine as the client.
 
 TEST SUITE
 ===============================================================================
@@ -133,7 +135,8 @@ The tests are implemented using the google-test library. If the user is
 interested in running these tests, then they must install google-test. The
 test suite's makefile expects google-test to be installed in the system
 directories. This means the static library 'gtest' should be stored in
-/usr/lib and a directory containing google-test's header files, also called 'gtest', to be present in /usr/include.
+/usr/lib and a directory containing google-test's header files, also called
+'gtest', to be present in /usr/include.
 
 KNOWN ISSUES
 ===============================================================================
