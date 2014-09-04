@@ -21,6 +21,9 @@ namespace cms
 
 		virtual std::string execute(OrderManagerPtr orderManager);
 
+		Commodity commodityFilter() const;
+		const std::string& dealerIDFilter() const;
+
 	private:
 		void filterByCommodity(OrderCollection& orders, Commodity commodity);
 		void filterByDealer(OrderCollection& orders, const std::string& dealerID);

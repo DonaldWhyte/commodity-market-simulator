@@ -69,6 +69,16 @@ namespace cms
 		return constructOrderListString(ordersToList);
 	}
 
+	Commodity ListCommand::commodityFilter() const
+	{
+		return commodityToList;
+	}
+
+	const std::string& ListCommand::dealerIDFilter() const
+	{
+		return dealerToList;
+	}
+
 	void ListCommand::filterByCommodity(OrderCollection& orders, Commodity commodity)
 	{
 		// Find IDs of all orders that DO NOT MATCH FILTER

@@ -42,4 +42,9 @@ namespace cms
 		}
 	}
 
+	OrderID RevokeCommand::orderID() const
+	{
+		return orderToRevoke;
+	}
+
 }

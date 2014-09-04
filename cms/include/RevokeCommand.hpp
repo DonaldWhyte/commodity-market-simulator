@@ -15,6 +15,8 @@ namespace cms
 
 		virtual std::string execute(OrderManagerPtr orderManager);
 
+		OrderID orderID() const;
+
 	private:
 		OrderID orderToRevoke;
 

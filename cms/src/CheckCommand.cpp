@@ -49,4 +49,9 @@ namespace cms
 		}
 	}
 
+	OrderID CheckCommand::orderID() const
+	{
+		return orderToCheck;
+	}
+
 }

@@ -62,4 +62,9 @@ namespace cms
 		orderManager->sellContracts(orderAggress.first, orderAggress.second);
 	}
 
+	const std::vector<OrderAggressAmount>& AggressCommand::allOrdersToAggress() const
+	{
+		return ordersToAggress;
+	}
+
 }

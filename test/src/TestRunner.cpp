@@ -4,6 +4,7 @@
 #include "TestCommands.hpp"
 #include "TestLock.hpp"
 #include "TestOrderManager.hpp"
+#include "TestCommandParsers.hpp"
 
 int main(int argc, char* argv[])
 {
