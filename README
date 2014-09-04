@@ -60,7 +60,8 @@ The following process is executed when CMS receives a dealer command:
        the client using the same TCP connection the client used to send the
        original command.
 
-All commands are children of the Command abstract class. Through polymorphism and multiple global lists, news command easily be added to the system. To
+All commands are children of the Command abstract class. Through polymorphism
+and multiple global lists, news command easily be added to the system. To
 create a new command, these steps must be followed:
     1) Implement the command's functionality by creating a subclass of Command
     2) Implement a function which parses the textual command and returns
@@ -75,7 +76,8 @@ dealer list is wrapped inside the DealerManager class. This means other ways
 of creating/loading dealers can be implemented without affecting the rest
 of the system.
 
-Extension 2 allows several clients to send commands to CMS at the same time. If these commands modify orders, then there is the possibility of race
+Extension 2 allows several clients to send commands to CMS at the same time.
+If these commands modify orders, then there is the possibility of race
 conditions occurring. Synchronisation mechanisms have been put in place to
 prevent these from occurring. Specifically, mutex locks have been used 
 within the ClientThreadManager class and on the application-wide OrderManager
@@ -106,7 +108,8 @@ and the second argument is the port number (used by the extensions).
 Arguments:
 	./cms {base|ext1|ext2} <portNo>
 
-The CMS client application requires the hostname and port of the CMS server, which is executed by using the two extensions in the CMS program. 
+The CMS client application requires the hostname and port of the CMS server,
+which is executed by using the two extensions in the CMS program. 
 
 Arguments:
 	./cmsclient <hostname> <port>
@@ -114,9 +117,23 @@ Arguments:
 Note that an IP address can be used instead of a hostname. 'localhost' or
 '127.0.0.1' should be used as the hostname if the CMS server is running on the same machine as the client.
 
-EXECUTING TEST SUITE
+TEST SUITE
 ===============================================================================
-TODO
+During development, tests were developed to ensure the correctness of certain
+parts of the applications. The parsing and execution of commands, as well as
+order management, are the focus of these tests.
+
+For completeness, these tests have been provided in the 'test' directory. This
+test suite has its own makefile, just like the 'cms' and 'cmsclient' programs.
+This makefile produces an executable called 'cmstests', which executes all the
+implemented tests. 'cmstests' outputs the results of each test on the command
+line.
+
+The tests are implemented using the google-test library. If the user is
+interested in running these tests, then they must install google-test. The
+test suite's makefile expects google-test to be installed in the system
+directories. This means the static library 'gtest' should be stored in
+/usr/lib and a directory containing google-test's header files, also called 'gtest', to be present in /usr/include.
 
 KNOWN ISSUES
 ===============================================================================
