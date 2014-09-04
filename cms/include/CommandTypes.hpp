@@ -34,18 +34,9 @@ namespace cms
 	 * stored in the COMMAND_TYPES array. */
 	static const unsigned int NUM_COMMAND_TYPES = 5;
 
-	const CommandType* getCommandType(const std::string& commandName)
-	{
-		for (unsigned int i = 0; (i < NUM_COMMAND_TYPES); i++)
-		{
-			if (commandName == COMMAND_TYPES[i].name)
-			{
-				return &COMMAND_TYPES[i];
-			}
-		}
-		// If this point is reached, no type with given name exists
-		return NULL;
-	}
+	/* Retrieve pointer to command type with given name.
+	 * If command with given name does not exist, return NULL. */
+	const CommandType* getCommandType(const std::string& commandName);
 
 }
 

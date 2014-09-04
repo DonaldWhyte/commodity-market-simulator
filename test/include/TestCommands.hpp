@@ -2,6 +2,7 @@
 #define CMS_TEST_COMMANDS_H
 
 #include <gtest/gtest.h>
+#include "CommandTypes.hpp"
 #include "OrderManager.hpp"
 #include "AggressCommand.hpp"
 #include "CheckCommand.hpp"
@@ -14,6 +15,16 @@ namespace cms
 
 	namespace test
 	{
+
+		TEST(CommandTypeTests, TypeRetrieval)
+		{
+			// Command which exists
+			const CommandType* type = getCommandType("POST");
+			ASSERT_FALSE(type == NULL);
+			EXPECT_EQ("POST", type->name);
+			// Non-existent command
+			ASSERT_EQ(NULL, getCommandType("HAHAHAHA"));
+		}
 
 		class CommandTests : public ::testing::Test
 		{
