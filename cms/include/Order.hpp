@@ -60,6 +60,10 @@ namespace cms
 		 * format described in the CMS' formal specification. */
 		std::string toString() const;
 
+		/* Equality operators for comparing orders. */
+		bool operator==(const Order& otherOrder) const;
+		bool operator!=(const Order& otherOrder) const;
+
 	private:
 		std::string orderDealerID;
 		Side orderSide;

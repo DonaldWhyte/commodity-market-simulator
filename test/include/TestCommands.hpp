@@ -1,6 +1,7 @@
 #ifndef CMS_TEST_COMMANDS_H
 #define CMS_TEST_COMMANDS_H
 
+#include <gtest/gtest.h>
 #include "OrderManager.hpp"
 #include "AggressCommand.hpp"
 #include "CheckCommand.hpp"
@@ -14,7 +15,7 @@ namespace cms
 	namespace test
 	{
 
-		class TestCommands : public ::testing::Test
+		class CommandTests : public ::testing::Test
 		{
 
 		public:
@@ -45,7 +46,7 @@ namespace cms
 
 		};
 
-		TEST_F(TestCommands, Aggress)
+		TEST_F(CommandTests, Aggress)
 		{
 			// Invalid order given
 			OrderAggressAmount invalidAggress(3, 1000);
@@ -86,7 +87,7 @@ namespace cms
 			ASSERT_EQ(8950, orderManager->getOrder(0).amount());
 		}
 
-		TEST_F(TestCommands, Check)
+		TEST_F(CommandTests, Check)
 		{
 			// Invalid order
 			CheckCommand command("RBS", 3);
@@ -107,7 +108,7 @@ namespace cms
 				command.run(orderManagerLock));
 		}
 
-		TEST_F(TestCommands, List)
+		TEST_F(CommandTests, List)
 		{
 			// Add one extra order for these tests
 			orderManager->postOrder(
@@ -148,7 +149,7 @@ namespace cms
 			);
 		}
 
-		TEST_F(TestCommands, Post)
+		TEST_F(CommandTests, Post)
 		{
 			// Post a new order, ensuring 
 			Order newOrder("RBS", SIDE_SELL, COMMODITY_PORK, 54762, 0.05);
@@ -164,7 +165,7 @@ namespace cms
 			EXPECT_EQ(0.05, orderManager->getOrder(2).price());
 		}
 
-		TEST_F(TestCommands, Revoke)
+		TEST_F(CommandTests, Revoke)
 		{
 			// Invalid order
 			RevokeCommand command("RBS", 3);

@@ -20,7 +20,7 @@ namespace cms
 		OrderManager(const OrderCollection& initialOrders = OrderCollection());
 
 		OrderID postOrder(const Order& newOrder); // returns ID of newly added order
-		bool revokeOrder(OrderID orderID); // returns false if order with given ID is not posted
+		bool revokeOrder(OrderID orderID); // returns false if order with given ID is not revoked
 		const Order& getOrder(OrderID orderID) const;
 
 		const void sellContracts(OrderID orderID, int amountToSell);

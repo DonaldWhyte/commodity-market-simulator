@@ -84,4 +84,19 @@ namespace cms
 		return outputStr;
 	}
 
+	bool Order::operator==(const Order& otherOrder) const
+	{
+		return (dealerID() == otherOrder.dealerID()
+			&& side() == otherOrder.side()
+			&& commodity() == otherOrder.commodity()
+			&& amount() == otherOrder.amount()
+			&& price() == otherOrder.price()
+		);
+	}
+
+	bool Order::operator!=(const Order& otherOrder) const
+	{
+		return (!(*this == otherOrder));
+	}
+
 }
