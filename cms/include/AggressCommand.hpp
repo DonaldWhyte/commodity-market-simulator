@@ -25,6 +25,7 @@ namespace cms
 	{
 
 	public:
+		AggressCommand(const std::string& dealerID, const OrderAggressAmount& ordersToAggress);
 		AggressCommand(const std::string& dealerID, const std::vector<OrderAggressAmount>& ordersToAggress);
 		virtual ~AggressCommand();
 

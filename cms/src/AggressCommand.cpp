@@ -5,6 +5,12 @@ namespace cms
 {
 
 	AggressCommand::AggressCommand(const std::string& dealerID,
+		const OrderAggressAmount& orderToAggress) : Command("AGGRESS", dealerID)
+	{
+		ordersToAggress.push_back(orderToAggress);
+	}
+
+	AggressCommand::AggressCommand(const std::string& dealerID,
 		const std::vector<OrderAggressAmount>& ordersToAggress)
 		: Command("AGGRESS", dealerID), ordersToAggress(ordersToAggress)
 	{

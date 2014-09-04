@@ -9,11 +9,11 @@ namespace cms
 	enum Commodity
 	{
 		COMMODITY_UNKNOWN = 0,
-		COMMIDITY_GOLD,
-		COMMIDITY_SILVER,
-		COMMIDITY_PORK,
-		COMMIDITY_OIL,
-		COMMIDITY_RICE,
+		COMMODITY_GOLD,
+		COMMODITY_SILVER,
+		COMMODITY_PORK,
+		COMMODITY_OIL,
+		COMMODITY_RICE,
 
 		// Used to iterate through enumerator, should always be last
 		NUM_COMMODITIES
@@ -46,7 +46,7 @@ namespace cms
 
 	public:
 		Order(const std::string& dealerID, Side orderSide,
-			Commodity orderCommodity, int orderAmont, double orderPrice);
+			Commodity orderCommodity, int orderAmount, double orderPrice);
 
 		const std::string& dealerID() const;
 		Side side() const;

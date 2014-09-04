@@ -52,7 +52,7 @@ namespace cms
 		bool success = foundOrder.reduceAmount(amountToSell);
 		if (!success) // not enough contracts to sell! throw exception
 		{
-			throw OrderException("Requested contracts to buy exceeds available contracts");
+			throw OrderException("Requested contracts to buy/sell exceeds available contracts");
 		}
 	}
 
