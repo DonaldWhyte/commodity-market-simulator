@@ -6,10 +6,14 @@
 #include "Command.hpp"
 #include "DealerManager.hpp"
 
+/*
+ * Description: Contains functions used to parse individual types
+ * of commands. CommandTypes.hpp links these functions to the correct
+ * command types. The functions are called by the CommandParser class.
+*/
 namespace cms
 {	
 
-	// Command type specific parse functions
 	CommandPtr parsePostCommand(const std::string& dealerID,
 		const std::vector<std::string>& args,
 		DealerManagerPtr dealerManager);

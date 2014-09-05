@@ -6,6 +6,11 @@
 namespace cms
 {
 
+	/*
+	 * Class: ParseException
+	 * Description: Exception thrown when there is an
+	 * error parsing command strings.
+	*/
 	class ParseException : public CMSException
 	{
 

@@ -6,6 +6,17 @@
 namespace cms
 {
 	
+	/*
+	 * Class: SingleConnectionServer
+	 * Description: Accepts commands from a remote TCP socket.
+	 *
+	 * This input mode listens on a specified port until
+	 * a client establishes a connection. Then, it receives
+	 * commands, executes them and sends the results back
+	 * to the client.
+
+	 * Once the client disconnects, this input mode terminates.
+	*/
 	class SingleConnectionServer : public InputMode
 	{
 

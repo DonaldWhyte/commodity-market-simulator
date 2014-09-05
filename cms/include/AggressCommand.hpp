@@ -11,7 +11,8 @@ namespace cms
 	/*
 	 * NOTE: In the CMS specification, how the trade reports
 	 * of several aggressions are displayed to the user has
-	 * not been specified. 
+	 * not been specified. Therefore, an assumption has been
+	 * made about the output format of multiple aggressions.
 	 *
 	 * When contracts from several orders are bought/sold, a
 	 * TRADE_REPORT string for each order is generated. These
@@ -21,6 +22,11 @@ namespace cms
 
 	typedef std::pair<OrderID, unsigned int> OrderAggressAmount;
 
+	/*
+	 * Class: AggressCommand
+	 * Description: This class executes the logic required to
+	 * to execute an AGGRESS command.
+	*/
 	class AggressCommand : public Command
 	{
 

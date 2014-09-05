@@ -10,6 +10,14 @@
 namespace cms
 {
 
+	/*
+	 * Class: ClientThreadManager
+	 * Description: Manages threads used to communicate with
+	 * connected clients. start() spawns a new thread to deal
+	 * with the given client socket, which returns the new
+	 * thread's unique ID. When a client disconnects, the ID
+	 * of that client's thread must be passed to threadStopped().
+	*/
 	class ClientThreadManager
 	{
 

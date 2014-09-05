@@ -9,6 +9,12 @@
 namespace cms
 {
 
+	/*
+	 * Interface: InputMode
+	 * Description: Interface implemented by each input mode.
+	 * This means input modes can be plugged-and-played into
+	 * the main CMS application.
+	*/
 	class InputMode
 	{
 

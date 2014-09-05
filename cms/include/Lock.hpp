@@ -6,6 +6,20 @@
 namespace cms
 {
 
+	/*
+	 * Class: Lock<T>
+	 * Description: Generic mutex lock class. It takes an instance
+	 * of type T and keeps a copy of it.
+	 *
+	 * When the applications wishes to read/write this value, it
+	 * acquires a pointer to it using acquire(), which LOCKS the
+	 * value in the process (preventing other code from accessing it).
+	 * When the application is done with the value, it must release
+	 * the lock using release().
+	 *
+	 * New copies of the value can be retrieved using getCopy().
+	 * This can be called without owning the lock on the value.
+	*/
 	template<typename T>
 	class Lock
 	{

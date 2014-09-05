@@ -8,6 +8,14 @@
 namespace cms
 {
 
+	/*
+	 * Class: Command
+	 * Description: Base class that all commands must derive from.
+	 * This class stores the two fields required for every command --
+	 * the command type and the dealer executing the command.
+	 * Note that each subclass must implement the execute() abstract
+	 * method, which contains the actual command logic.
+	*/
 	class Command
 	{
 

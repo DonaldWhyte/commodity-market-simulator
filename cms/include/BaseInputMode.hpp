@@ -6,6 +6,12 @@
 namespace cms
 {
 	
+	/*
+	 * Class: BaseInputMode
+	 * Description: Accepts user input (i.e. CMS commands) from
+	 * the command line (via stdin) and outputs the results of
+	 * those commands using stdout.
+	*/
 	class BaseInputMode : public InputMode
 	{
 

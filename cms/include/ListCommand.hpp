@@ -9,6 +9,14 @@
 namespace cms
 {
 
+	/*
+	 * Class: CheckCommand
+	 * Description: This class executes the logic required to
+	 * to execute a LIST command. Note that the commodity and
+	 * dealer filter arguments in the class' constructor are
+	 * OPTIONAL. If they are not given, then the filters will
+	 * not be used.
+	*/
 	class ListCommand : public Command
 	{
 

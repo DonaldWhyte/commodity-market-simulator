@@ -6,6 +6,11 @@
 namespace cms
 {
 
+	/*
+	 * Class: RevokeCommand
+	 * Description: This class executes the logic required to
+	 * to execute a REVOKE command.
+	*/
 	class RevokeCommand : public Command
 	{
 

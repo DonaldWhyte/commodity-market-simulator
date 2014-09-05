@@ -12,6 +12,18 @@ namespace cms
 	// threads are created/destroyed 
 	static const bool THREAD_LOGGING_ENABLED = true;
 
+	/*
+	 * Class: MultithreadedServer
+	 * Description: Accepts commands from remote TCP sockets.
+	 *
+	 * This input mode listens on a specified port for client
+	 * connections. Once a client connects, a new thread is
+	 * spawned to handle commands given by that client.
+	 *
+	 * Once all connected clients have disconnected, and there
+	 * are no more client threads remaining, this input mode
+	 * terminates.
+	*/
 	class MultithreadedServer : public InputMode
 	{
 
