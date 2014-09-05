@@ -9,6 +9,11 @@ namespace cms
 	namespace net
 	{
 
+		/*
+		 * Class: NetworkException
+		 * Description: Exception thrown when an error occurs
+		 * during network communication.
+		*/
 		class NetworkException : public CMSException
 		{
 

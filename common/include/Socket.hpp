@@ -16,6 +16,14 @@ namespace cms
 		 * is used instead of char[] for RAII benefits. */
 		typedef std::vector<char> ByteBuffer;
 
+		/*
+		 * Class: Socket
+		 * Description: Provides low-level socket communication
+		 * over TCP. First, a connection must be established to
+		 * a server via connect(), then the send() and receive()
+		 * functions can be used to send data to, and receive
+		 * data from, the server.
+		*/
 		class Socket
 		{
 

@@ -8,6 +8,15 @@
 namespace cms
 {
 
+	/*
+	 * Class: CMSClient
+	 * Description:
+	 * High-level client interface to CMS server. The user executes 
+	 * commands on the remote CMS server by passing command strings
+	 * to the executeCommand() method. The result of the command is
+	 * received from the server, which is the return value of
+	 * executeCommand().
+	 */
 	class CMSClient
 	{
 
