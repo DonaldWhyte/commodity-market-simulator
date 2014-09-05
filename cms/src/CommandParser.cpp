@@ -20,6 +20,16 @@ namespace cms
 	{
 		using namespace std; // to make tokenisation cope more readable
 
+		// Ensure command has not exceeded maximum length
+		if (commandStr.length() > MAX_COMMAND_LENGTH)
+		{
+			std::stringstream errorMessage;
+			errorMessage << "Command exceeds maximum length (command length: "
+				<< commandStr.length() << ", max length: "
+				<< MAX_COMMAND_LENGTH << ")";
+			throw ParseException(errorMessage.str());
+		}
+
 		// Tokenise command string using whitespace as token delimiters
 		vector<string> tokens;
 		istringstream stream(commandStr);

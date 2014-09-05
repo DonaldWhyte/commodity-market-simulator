@@ -37,6 +37,10 @@ namespace cms
 		{
 			// Empty string
 			EXPECT_THROW(parser->parse(""), ParseException);
+			// String which exceeds maximum length
+			std::string validCommandButTooLong =
+			"DB LIST " + std::string(MAX_COMMAND_LENGTH, ' ');
+			EXPECT_THROW(parser->parse(validCommandButTooLong), ParseException);
 			// Gibberish
 			EXPECT_THROW(parser->parse("sotu58h7=h3jfhgr"), ParseException);
 			// Just dealer ID

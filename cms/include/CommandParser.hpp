@@ -8,6 +8,9 @@
 namespace cms
 {
 
+	// Maximum number of characters allowed in a single command
+	static const unsigned int MAX_COMMAND_LENGTH = 255;
+
 	/*
 	 * CLASS: CommandParser
 	 * DESCRIPTION: Parses command strings, returning a pointer
