@@ -84,8 +84,16 @@ prevent these from occurring. Specifically, mutex locks have been used
 within the ClientThreadManager class and on the application-wide OrderManager
 instance. These ensure that only client can modify orders at a time.
 
-TODO: mention how the purpose of each class has been documented via comment
-headers above each class
+DOCUMENTATION
+===============================================================================
+No explicit documentation has been written for this project. It is felt that
+much of the code is self-documented through descriptive variable and method
+names. Comments have been added to fields and methods when what they do may
+not be immediately obvious.
+
+Additionally, comment headers are provided above each class, namespace,
+structure and enumerator. These describe what the intent of the structure is
+and how it works.
 
 COMPILATION GUIDE
 ===============================================================================
