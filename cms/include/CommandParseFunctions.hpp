@@ -7,7 +7,7 @@
 #include "DealerManager.hpp"
 
 /*
- * Description: Contains functions used to parse individual types
+ * DESCRIPTION: Contains functions used to parse individual types
  * of commands. CommandTypes.hpp links these functions to the correct
  * command types. The functions are called by the CommandParser class.
 */

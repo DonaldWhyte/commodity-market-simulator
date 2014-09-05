@@ -7,8 +7,8 @@ namespace cms
 {
 	
 	/*
-	 * Class: BaseInputMode
-	 * Description: Accepts user input (i.e. CMS commands) from
+	 * CLASS: BaseInputMode
+	 * DESCRIPTION: Accepts user input (i.e. CMS commands) from
 	 * the command line (via stdin) and outputs the results of
 	 * those commands using stdout.
 	*/

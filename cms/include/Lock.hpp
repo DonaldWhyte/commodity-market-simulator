@@ -7,8 +7,8 @@ namespace cms
 {
 
 	/*
-	 * Class: Lock<T>
-	 * Description: Generic mutex lock class. It takes an instance
+	 * CLASS: Lock<T>
+	 * DESCRIPTION: Generic mutex lock class. It takes an instance
 	 * of type T and keeps a copy of it.
 	 *
 	 * When the applications wishes to read/write this value, it

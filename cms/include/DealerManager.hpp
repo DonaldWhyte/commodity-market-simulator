@@ -9,8 +9,8 @@ namespace cms
 {
 
 	/*
-	 * Class: DealerManager
-	 * Description: Loads all CMS dealers.
+	 * CLASS: DealerManager
+	 * DESCRIPTION: Loads all CMS dealers.
 	 * For now, dealers are hard-coded. These hard-coded values
 	 * were wrapped in this class. This was done to allow more
 	 * complex mechanisms for loading in dealers to be added,

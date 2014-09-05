@@ -9,8 +9,8 @@ namespace cms
 {
 
 	/*
-	 * Class: CommandParser
-	 * Description: Parses command strings, returning a pointer
+	 * CLASS: CommandParser
+	 * DESCRIPTION: Parses command strings, returning a pointer
 	 * to a Command object that can be executed.
 	 *
 	 * Note that this requires an instance of DealerManager

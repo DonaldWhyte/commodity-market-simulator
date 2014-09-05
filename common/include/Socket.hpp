@@ -17,8 +17,8 @@ namespace cms
 		typedef std::vector<char> ByteBuffer;
 
 		/*
-		 * Class: Socket
-		 * Description: Provides low-level socket communication
+		 * CLASS: Socket
+		 * DESCRIPTION: Provides low-level socket communication
 		 * over TCP. First, a connection must be established to
 		 * a server via connect(), then the send() and receive()
 		 * functions can be used to send data to, and receive

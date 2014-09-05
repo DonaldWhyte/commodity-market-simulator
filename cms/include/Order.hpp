@@ -7,8 +7,8 @@ namespace cms
 {
 
 	/*
-	 * Enumerator: Commodity
-	 * Description: Enumerator that defines all commodities traded in CMS. 
+	 * ENUMERATOR: Commodity
+	 * DESCRIPTION: Enumerator that defines all commodities traded in CMS. 
 	*/
 	enum Commodity
 	{
@@ -27,8 +27,8 @@ namespace cms
 	};	
 
 	/*
-	 * Enumerator: Side
-	 * Description: Enumerator that defines the two valid trading sides.
+	 * ENUMERATOR: Side
+	 * DESCRIPTION: Enumerator that defines the two valid trading sides.
 	*/
 	enum Side
 	{
@@ -49,8 +49,8 @@ namespace cms
 	Side toSide(const std::string& str);
 
 	/*
-	 * Class: Order
-	 * Description: Represents an order posted on the CMS. It contains
+	 * CLASS: Order
+	 * DESCRIPTION: Represents an order posted on the CMS. It contains
 	 * which dealer posted the order, the commodity and side of the order
 	 * as well as the amount of contracts and the price they are being
 	 * bought/sold for.

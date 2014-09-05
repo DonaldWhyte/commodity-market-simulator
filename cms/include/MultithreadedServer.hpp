@@ -13,8 +13,8 @@ namespace cms
 	static const bool THREAD_LOGGING_ENABLED = true;
 
 	/*
-	 * Class: MultithreadedServer
-	 * Description: Accepts commands from remote TCP sockets.
+	 * CLASS: MultithreadedServer
+	 * DESCRIPTION: Accepts commands from remote TCP sockets.
 	 *
 	 * This input mode listens on a specified port for client
 	 * connections. Once a client connects, a new thread is

@@ -10,7 +10,7 @@
 #          2007/06/26 (version 0.4)
 #          2008/04/05 (version 0.5)
 #
-# Description:
+# DESCRIPTION:
 # ------------
 # This is an easily customizable makefile template. The purpose is to
 # provide an instant building environment for C/C++ programs.

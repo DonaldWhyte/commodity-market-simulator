@@ -7,8 +7,8 @@ namespace cms
 {
 	
 	/*
-	 * Class: SingleConnectionServer
-	 * Description: Accepts commands from a remote TCP socket.
+	 * CLASS: SingleConnectionServer
+	 * DESCRIPTION: Accepts commands from a remote TCP socket.
 	 *
 	 * This input mode listens on a specified port until
 	 * a client establishes a connection. Then, it receives

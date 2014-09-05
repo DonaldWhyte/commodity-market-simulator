@@ -23,8 +23,8 @@ namespace cms
 	typedef std::pair<OrderID, unsigned int> OrderAggressAmount;
 
 	/*
-	 * Class: AggressCommand
-	 * Description: This class executes the logic required to
+	 * CLASS: AggressCommand
+	 * DESCRIPTION: This class executes the logic required to
 	 * to execute an AGGRESS command.
 	*/
 	class AggressCommand : public Command

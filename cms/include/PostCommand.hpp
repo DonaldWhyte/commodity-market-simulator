@@ -8,8 +8,8 @@ namespace cms
 {
 
 	/*
-	 * Class: OrderCommand
-	 * Description: This class executes the logic required to
+	 * CLASS: OrderCommand
+	 * DESCRIPTION: This class executes the logic required to
 	 * to execute an ORDER command.
 	*/
 	class PostCommand : public Command

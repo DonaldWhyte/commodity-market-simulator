@@ -14,8 +14,8 @@ namespace cms
 	typedef std::map<OrderID, Order> OrderCollection;
 
 	/*
-	 * Class: OrderManager
-	 * Description: Stores all orders posted on the CMS, and provides
+	 * CLASS: OrderManager
+	 * DESCRIPTION: Stores all orders posted on the CMS, and provides
 	 * functionality to post, revoke, aggress and retrieve orders.
 	*/
 	class OrderManager

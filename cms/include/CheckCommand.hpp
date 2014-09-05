@@ -7,8 +7,8 @@ namespace cms
 {
 
 	/*
-	 * Class: CheckCommand
-	 * Description: This class executes the logic required to
+	 * CLASS: CheckCommand
+	 * DESCRIPTION: This class executes the logic required to
 	 * to execute a CHECK command.
 	*/
 	class CheckCommand : public Command

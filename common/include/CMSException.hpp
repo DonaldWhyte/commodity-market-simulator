@@ -8,8 +8,8 @@ namespace cms
 {
 
 	/*
-	 * Class: CMSException
-	 * Description: Base class for all exceptions thrown in
+	 * CLASS: CMSException
+	 * DESCRIPTION: Base class for all exceptions thrown in
 	 * CMS applications. Thrown when general errors occur.
 	*/
 	class CMSException : public std::exception

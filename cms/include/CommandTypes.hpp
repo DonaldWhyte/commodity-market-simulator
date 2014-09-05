@@ -15,8 +15,8 @@ namespace cms
 		DealerManagerPtr dealerManager);	
 
 	/*
-	 * Structure: CommandType
-	 * Description: Contains meta data on a command type.
+	 * STRUCTURE: CommandType
+	 * DESCRIPTION: Contains meta data on a command type.
 	 * This data is required to correct parse commands.
 	*/
 	struct CommandType

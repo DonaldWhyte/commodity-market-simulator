@@ -10,8 +10,8 @@ namespace cms
 	{
 
 		/*
-		 * Class: NetworkException
-		 * Description: Exception thrown when an error occurs
+		 * CLASS: NetworkException
+		 * DESCRIPTION: Exception thrown when an error occurs
 		 * during network communication.
 		*/
 		class NetworkException : public CMSException

@@ -8,7 +8,7 @@ namespace cms
 
 	/*
 	 * Namespace: util
-	 * Description: Contains generic utility functions used in multiple
+	 * DESCRIPTION: Contains generic utility functions used in multiple
 	 * areas of the applications.
 	*/
 	namespace util
