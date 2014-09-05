@@ -54,27 +54,27 @@ namespace cms
 		TEST_F(OrderManagerTests, PostOrder)
 		{
 			Order newOrder("RBS", SIDE_SELL, COMMODITY_PORK, 54762, 0.05);
-			ASSERT_THROW(orderManager->getOrder(2), OrderException);
-			EXPECT_EQ(2, orderManager->postOrder(newOrder));
-			EXPECT_EQ(newOrder, orderManager->getOrder(2));
+			ASSERT_THROW(orderManager->getOrder(3), OrderException);
+			EXPECT_EQ(3, orderManager->postOrder(newOrder));
+			EXPECT_EQ(newOrder, orderManager->getOrder(3));
 		}
 
 		TEST_F(OrderManagerTests, RevokeOrder)
 		{
 			// Order that exists
-			ASSERT_EQ(testOrders[0], orderManager->getOrder(0));
-			ASSERT_TRUE(orderManager->revokeOrder(0));
-			ASSERT_THROW(orderManager->getOrder(0), OrderException);
+			ASSERT_EQ(testOrders[0], orderManager->getOrder(1));
+			ASSERT_TRUE(orderManager->revokeOrder(1));
+			ASSERT_THROW(orderManager->getOrder(1), OrderException);
 			// Non-existent order (the one that was just revoked)
-			ASSERT_FALSE(orderManager->revokeOrder(0));
+			ASSERT_FALSE(orderManager->revokeOrder(1));
 		}
 
 		TEST_F(OrderManagerTests, GetOrder)
 		{
 			// Order that exists
-			ASSERT_EQ(testOrders[0], orderManager->getOrder(0));
+			ASSERT_EQ(testOrders[0], orderManager->getOrder(1));
 			// Non-existent order
-			ASSERT_THROW(orderManager->getOrder(2), OrderException);
+			ASSERT_THROW(orderManager->getOrder(3), OrderException);
 		}
 
 		TEST_F(OrderManagerTests, SellContracts)
@@ -82,20 +82,20 @@ namespace cms
 			// Non-existent order
 			EXPECT_THROW(orderManager->sellContracts(3, 100), OrderException);
 			// Order that exists
-			ASSERT_EQ(10000, orderManager->getOrder(0).amount());
-			orderManager->sellContracts(0, 1000);
-			ASSERT_EQ(9000, orderManager->getOrder(0).amount());
+			ASSERT_EQ(10000, orderManager->getOrder(1).amount());
+			orderManager->sellContracts(1, 1000);
+			ASSERT_EQ(9000, orderManager->getOrder(1).amount());
 			// Requesting to buy/sell more contracts than available
-			EXPECT_THROW(orderManager->sellContracts(0, 2000000), OrderException);
+			EXPECT_THROW(orderManager->sellContracts(1, 2000000), OrderException);
 		}
 
 		TEST_F(OrderManagerTests, AllOrders)
 		{
 			OrderCollection expectedCollection;
 			expectedCollection.insert(
-				std::pair<OrderID, Order>(0, testOrders[0]));
+				std::pair<OrderID, Order>(1, testOrders[0]));
 			expectedCollection.insert(
-				std::pair<OrderID, Order>(1, testOrders[1]));
+				std::pair<OrderID, Order>(2, testOrders[1]));
 			ASSERT_EQ(expectedCollection, orderManager->allOrders());
 		}
 

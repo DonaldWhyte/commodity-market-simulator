@@ -67,35 +67,35 @@ namespace cms
 				"Order with ID '3' does not exist\nEND OF AGGRESS");
 
 			// Aggressing single order
-			OrderAggressAmount validAggress(0, 1000);
+			OrderAggressAmount validAggress(1, 1000);
 			command = AggressCommand("RBS", validAggress);
 
-			ASSERT_EQ(10000, orderManager->getOrder(0).amount());
+			ASSERT_EQ(10000, orderManager->getOrder(1).amount());
 			ASSERT_EQ(command.run(orderManagerLock),
 				"SOLD 1000 GOLD @ 22.2 FROM DB\nEND OF AGGRESS");
-			ASSERT_EQ(9000, orderManager->getOrder(0).amount());
+			ASSERT_EQ(9000, orderManager->getOrder(1).amount());
 
 			// Aggressing multiple orders
 			std::vector<OrderAggressAmount> multipleAggressions;
-			multipleAggressions.push_back(OrderAggressAmount(0, 50));
-			multipleAggressions.push_back(OrderAggressAmount(1, 25234));
+			multipleAggressions.push_back(OrderAggressAmount(1, 50));
+			multipleAggressions.push_back(OrderAggressAmount(2, 25234));
 			command = AggressCommand("RBS", multipleAggressions);
 
-			ASSERT_EQ(9000, orderManager->getOrder(0).amount());
-			ASSERT_EQ(200000, orderManager->getOrder(1).amount());
+			ASSERT_EQ(9000, orderManager->getOrder(1).amount());
+			ASSERT_EQ(200000, orderManager->getOrder(2).amount());
 			ASSERT_EQ(command.run(orderManagerLock),
 				"SOLD 50 GOLD @ 22.2 FROM DB\nBOUGHT 25234 SILV @ 12.424 FROM HSBC\nEND OF AGGRESS");
-			ASSERT_EQ(8950, orderManager->getOrder(0).amount());
-			ASSERT_EQ(174766, orderManager->getOrder(1).amount());
+			ASSERT_EQ(8950, orderManager->getOrder(1).amount());
+			ASSERT_EQ(174766, orderManager->getOrder(2).amount());
 
 			// Trying to buy/sell more contracts than are available
-			OrderAggressAmount tooManyContracts(0, 1000000);
+			OrderAggressAmount tooManyContracts(1, 1000000);
 			command = AggressCommand("RBS", tooManyContracts);
 
-			ASSERT_EQ(8950, orderManager->getOrder(0).amount());
+			ASSERT_EQ(8950, orderManager->getOrder(1).amount());
 			ASSERT_EQ(command.run(orderManagerLock),
 				"Requested contracts to buy/sell exceeds available contracts\nEND OF AGGRESS");
-			ASSERT_EQ(8950, orderManager->getOrder(0).amount());
+			ASSERT_EQ(8950, orderManager->getOrder(1).amount());
 		}
 
 		TEST_F(CommandTests, Check)
@@ -105,17 +105,17 @@ namespace cms
 			EXPECT_EQ("UNKNOWN_ORDER",
 				command.run(orderManagerLock));
 			// Not authorised to check order
-			command = CheckCommand("RBS", 0);
+			command = CheckCommand("RBS", 1);
 			EXPECT_EQ("UNAUTHORIZED",
 				command.run(orderManagerLock));
 			// Order with contracts left (authorised)
-			command = CheckCommand("DB", 0);
-			EXPECT_EQ("0 DB BUY GOLD 10000 22.2",
+			command = CheckCommand("DB", 1);
+			EXPECT_EQ("1 DB BUY GOLD 10000 22.2",
 				command.run(orderManagerLock));
 			// Order with no contracts left (authorised)
-			orderManager->sellContracts(0, 10000);
-			command = CheckCommand("DB", 0);
-			EXPECT_EQ("0 HAS BEEN FILLED",
+			orderManager->sellContracts(1, 10000);
+			command = CheckCommand("DB", 1);
+			EXPECT_EQ("1 HAS BEEN FILLED",
 				command.run(orderManagerLock));
 		}
 
@@ -129,7 +129,7 @@ namespace cms
 
 			// No filters
 			ListCommand command("RBS", dealerManager);
-			EXPECT_EQ("0 DB BUY GOLD 10000 22.2\n1 HSBC SELL SILV 200000 12.424\n2 HSBC BUY GOLD 100000 16.354\nEND OF LIST",
+			EXPECT_EQ("1 DB BUY GOLD 10000 22.2\n2 HSBC SELL SILV 200000 12.424\n3 HSBC BUY GOLD 100000 16.354\nEND OF LIST",
 				command.run(orderManagerLock));
 			// Filter by commodity (invalid commodity)
 			EXPECT_THROW(
@@ -138,11 +138,11 @@ namespace cms
 			);
 			// Filter by commodity
 			command = ListCommand("RBS", dealerManager, "GOLD");
-			EXPECT_EQ("0 DB BUY GOLD 10000 22.2\n2 HSBC BUY GOLD 100000 16.354\nEND OF LIST",
+			EXPECT_EQ("1 DB BUY GOLD 10000 22.2\n3 HSBC BUY GOLD 100000 16.354\nEND OF LIST",
 				command.run(orderManagerLock));
 			// Filter by commodity AND dealer
 			command = ListCommand("RBS", dealerManager, "GOLD", "HSBC");
-			EXPECT_EQ("2 HSBC BUY GOLD 100000 16.354\nEND OF LIST",
+			EXPECT_EQ("3 HSBC BUY GOLD 100000 16.354\nEND OF LIST",
 				command.run(orderManagerLock));
 
 			// Filter by commodity (where no orders are for that commodity)
@@ -166,14 +166,14 @@ namespace cms
 			Order newOrder("RBS", SIDE_SELL, COMMODITY_PORK, 54762, 0.05);
 			PostCommand command("RBS", newOrder);
 
-			ASSERT_THROW(orderManager->getOrder(2), OrderException);
-			EXPECT_EQ("2 RBS SELL PORK 54762 0.05 HAS BEEN POSTED",
+			ASSERT_THROW(orderManager->getOrder(3), OrderException);
+			EXPECT_EQ("3 RBS SELL PORK 54762 0.05 HAS BEEN POSTED",
 				command.run(orderManagerLock));
-			EXPECT_EQ("RBS", orderManager->getOrder(2).dealerID());
-			EXPECT_EQ(SIDE_SELL, orderManager->getOrder(2).side());
-			EXPECT_EQ(COMMODITY_PORK, orderManager->getOrder(2).commodity());
-			EXPECT_EQ(54762, orderManager->getOrder(2).amount());
-			EXPECT_EQ(0.05, orderManager->getOrder(2).price());
+			EXPECT_EQ("RBS", orderManager->getOrder(3).dealerID());
+			EXPECT_EQ(SIDE_SELL, orderManager->getOrder(3).side());
+			EXPECT_EQ(COMMODITY_PORK, orderManager->getOrder(3).commodity());
+			EXPECT_EQ(54762, orderManager->getOrder(3).amount());
+			EXPECT_EQ(0.05, orderManager->getOrder(3).price());
 		}
 
 		TEST_F(CommandTests, Revoke)
@@ -182,13 +182,13 @@ namespace cms
 			RevokeCommand command("RBS", 3);
 			EXPECT_EQ("UNKNOWN_ORDER", command.run(orderManagerLock));
 			// Not authorised to revoke order
-			command = RevokeCommand("RBS", 0);
+			command = RevokeCommand("RBS", 1);
 			EXPECT_EQ("UNAUTHORIZED", command.run(orderManagerLock));
 			// Valid revocation
-			command = RevokeCommand("DB", 0);
-			ASSERT_EQ("DB", orderManager->getOrder(0).dealerID()); // ensure order still exists first!
-			EXPECT_EQ("0 HAS BEEN REVOKED", command.run(orderManagerLock));
-			ASSERT_THROW(orderManager->getOrder(0), OrderException); // ensure order is removed from list
+			command = RevokeCommand("DB", 1);
+			ASSERT_EQ("DB", orderManager->getOrder(1).dealerID()); // ensure order still exists first!
+			EXPECT_EQ("1 HAS BEEN REVOKED", command.run(orderManagerLock));
+			ASSERT_THROW(orderManager->getOrder(1), OrderException); // ensure order is removed from list
 		}
 
 	}

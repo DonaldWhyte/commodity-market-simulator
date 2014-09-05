@@ -5,7 +5,7 @@ namespace cms
 {
 
 	OrderManager::OrderManager(const OrderCollection& initialOrders)
-		: orders(initialOrders), idCounter(initialOrders.size())
+		: orders(initialOrders), idCounter(initialOrders.size() + 1) // start order IDs at 1
 	{
 	}
 
