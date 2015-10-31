@@ -118,7 +118,7 @@ which is executed by using the two extensions in the CMS program.
 Usage:
 
 ```
-    ./cmsclient <hostname> <port>
+./cmsclient <hostname> <port>
 ```
 
 Note that an IP address can be used instead of a hostname. `localhost` or
